@@ -73,30 +73,30 @@
 
 .dark {
   /* Navy dark theme — base: #101C2C */
-  --background: #101C2C;
-  --foreground: oklch(92% 0.005 220);    /* Slightly cool off-white */
-  --card: #162336;                       /* +2 stops lighter navy */
+  --background: #101c2c;
+  --foreground: oklch(92% 0.005 220); /* Slightly cool off-white */
+  --card: #162336; /* +2 stops lighter navy */
   --card-foreground: oklch(92% 0.005 220);
-  --popover: #1a2a3e;                    /* Dropdown — elevated */
+  --popover: #1a2a3e; /* Dropdown — elevated */
   --popover-foreground: oklch(92% 0.005 220);
-  --primary: oklch(65% 0.18 195);        /* Teal — pops on navy */
+  --primary: oklch(65% 0.18 195); /* Teal — pops on navy */
   --primary-foreground: oklch(100% 0 0);
   --secondary: #1a2a3e;
   --secondary-foreground: oklch(80% 0.005 220);
-  --muted: #0d1824;                      /* Darker than bg — subtle areas */
+  --muted: #0d1824; /* Darker than bg — subtle areas */
   --muted-foreground: oklch(58% 0.01 220); /* Readable secondary text */
-  --accent: #1e3048;                     /* Hover/active state */
+  --accent: #1e3048; /* Hover/active state */
   --accent-foreground: oklch(92% 0.005 220);
   --destructive: oklch(60% 0.22 25);
-  --border: #1e3048;                     /* Subtle navy border */
-  --input: #162336;                      /* Input bg — same as card */
+  --border: #1a3455; /* Visible navy border */
+  --input: #152d4d; /* Input border — visible on dark bg */
   --ring: oklch(65% 0.18 195);
   --chart-1: oklch(62% 0.18 195);
   --chart-2: oklch(58% 0.16 160);
   --chart-3: oklch(65% 0.15 280);
   --chart-4: oklch(68% 0.17 45);
   --chart-5: oklch(62% 0.18 320);
-  --sidebar: #0d1824;                    /* Sidebar — darker than bg */
+  --sidebar: #0d1824; /* Sidebar — darker than bg */
   --sidebar-foreground: oklch(85% 0.005 220);
   --sidebar-primary: oklch(65% 0.18 195);
   --sidebar-primary-foreground: oklch(100% 0 0);
@@ -149,7 +149,7 @@
   }
 
   /* ─── Form Elements - Professional Spacing ─── */
-  
+
   /* Labels - Golden ratio spacing (8px base) */
   label {
     @apply mb-2 block font-medium;
@@ -168,7 +168,7 @@
   select,
   textarea {
     @apply h-11 px-4 py-2.5 rounded-lg;
-    @apply border border-input bg-background;
+    @apply border border-input bg-card;
     @apply text-base leading-normal;
     @apply transition-all duration-200;
     @apply focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent;
@@ -244,7 +244,7 @@
 
 @layer components {
   /* ─── Card Components ─── */
-  
+
   /* Enhanced card with hover effect */
   .card-hover {
     @apply transition-all duration-300;
@@ -258,7 +258,7 @@
   }
 
   /* ─── Layout Utilities ─── */
-  
+
   /* Section padding - Consistent vertical rhythm */
   .section-padding {
     @apply py-16 px-4 md:py-20 md:px-6 lg:py-24 lg:px-8;
@@ -279,7 +279,7 @@
   }
 
   /* ─── Form Groups ─── */
-  
+
   /* Form field wrapper - Proper spacing */
   .form-field {
     @apply space-y-2 mb-5;
@@ -296,7 +296,7 @@
   }
 
   /* ─── Visual Effects ─── */
-  
+
   /* Gradient text */
   .gradient-text {
     @apply bg-gradient-to-r from-cyan-500 via-teal-500 to-emerald-500;
@@ -315,7 +315,7 @@
   }
 
   /* ─── Status Badges ─── */
-  
+
   .badge-success {
     @apply inline-flex items-center gap-1.5;
     @apply px-3 py-1 rounded-full text-sm font-medium;
@@ -345,7 +345,7 @@
   }
 
   /* ─── Button Variants ─── */
-  
+
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2;
     @apply h-11 px-6 rounded-lg;
@@ -424,6 +424,7 @@
 .logo-adaptive {
   transition: filter 0.3s ease;
 }
-html.dark .logo-adaptive {
+html.dark .logo-adaptive,
+.dark .logo-adaptive {
   filter: invert(1);
 }

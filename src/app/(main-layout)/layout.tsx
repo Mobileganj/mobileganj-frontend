@@ -4,7 +4,7 @@ import Footer from "@/components/shared/main/Footer"
 import FloatingContact from "@/components/shared/main/FloatingContact"
 import BottomNav from "@/components/shared/BottomNav"
 
-const MainLayout = ({children}:{children:ReactNode}) => {
+const MainLayout = ({ children, authModal, cartModal }: { children: ReactNode; authModal: ReactNode; cartModal: ReactNode }) => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -12,6 +12,8 @@ const MainLayout = ({children}:{children:ReactNode}) => {
       <Footer />
       <FloatingContact />
       <BottomNav />
+      {authModal}
+      {cartModal}
     </div>
   )
 }

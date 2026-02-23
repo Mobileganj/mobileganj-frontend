@@ -69,7 +69,7 @@ export default function Footer() {
                 key={feature.title}
                 className={`flex items-center gap-3 py-5 px-4 ${
                   i < features.length - 1
-                    ? "border-r border-border/40 max-lg:last:border-r-0 max-lg:[&:nth-child(2)]:border-r-0"
+                    ? "border-r border-border/40 max-lg:last:border-r-0 max-lg:nth-2:border-r-0"
                     : ""
                 } ${i >= 2 ? "max-lg:border-t max-lg:border-border/40" : ""}`}
               >
@@ -97,7 +97,7 @@ export default function Footer() {
             {/* ─ Brand & About ─ */}
             <div className="lg:col-span-4">
               <Link href="/" className="inline-flex items-center gap-2 mb-4">
-                <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center">
+                <div className="h-9 w-9 rounded-xl bg-linear-to-br from-primary to-primary/80 flex items-center justify-center">
                   <Smartphone className="h-5 w-5 text-primary-foreground" />
                 </div>
                 <div>
