@@ -54,43 +54,50 @@ export default function TestimonialsSection() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {testimonials.map((t, idx) => (
-          <motion.div
-            key={t.id}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: idx * 0.1 }}
-            className="bg-card border rounded-xl p-5 hover:shadow-md transition-all"
-          >
-            <Quote className="w-8 h-8 text-primary/20 mb-3" />
-            <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-              &quot;{t.text}&quot;
-            </p>
-            <div className="flex items-center gap-1 mb-3">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star
-                  key={i}
-                  className={`w-3.5 h-3.5 ${
-                    i < t.rating
-                      ? "text-yellow-500 fill-yellow-500"
-                      : "text-muted-foreground/30"
-                  }`}
-                />
-              ))}
-            </div>
-            <div className="flex items-center gap-3">
-              <span className="text-2xl">{t.avatar}</span>
-              <div>
-                <p className="text-sm font-semibold">{t.name}</p>
-                <p className="text-xs text-muted-foreground">
-                  {t.location} • {t.product}
-                </p>
+      <div className="overflow-hidden pb-8">
+        <motion.div
+          className="flex gap-4 sm:gap-6 w-fit"
+          animate={{ x: [0, "-50%"] }}
+          transition={{
+            repeat: Infinity,
+            ease: "linear",
+            duration: 25,
+          }}
+        >
+          {/* Seamless infinite loop array duplication */}
+          {[...testimonials, ...testimonials].map((t, idx) => (
+            <div
+              key={`${t.id}-${idx}`}
+              className="bg-card border rounded-xl p-5 hover:shadow-md transition-all w-[280px] md:w-[320px] shrink-0 whitespace-normal"
+            >
+              <Quote className="w-8 h-8 text-primary/20 mb-3" />
+              <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+                &quot;{t.text}&quot;
+              </p>
+              <div className="flex items-center gap-1 mb-3">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star
+                    key={i}
+                    className={`w-3.5 h-3.5 ${
+                      i < t.rating
+                        ? "text-yellow-500 fill-yellow-500"
+                        : "text-muted-foreground/30"
+                    }`}
+                  />
+                ))}
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">{t.avatar}</span>
+                <div>
+                  <p className="text-sm font-semibold">{t.name}</p>
+                  <p className="text-xs text-muted-foreground">
+                    {t.location} • {t.product}
+                  </p>
+                </div>
               </div>
             </div>
-          </motion.div>
-        ))}
+          ))}
+        </motion.div>
       </div>
     </section>
   );
