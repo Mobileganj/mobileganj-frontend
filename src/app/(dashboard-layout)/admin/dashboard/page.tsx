@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import StatCard from "./_components/StatCard";
-import QuickActions from "./_components/QuickActions";
+
 import RecentSales from "./_components/RecentSales";
 import DueList from "./_components/DueList";
 import {
@@ -123,15 +123,7 @@ export default function DashboardPage() {
             colorClass="bg-gradient-to-br from-purple-500 to-purple-600 text-white"
           />
         </motion.div>
-        <motion.div variants={item}>
-          <StatCard
-            title="Instant Paid"
-            value={980000}
-            icon={CreditCard}
-            trend={{ value: "+8.2%", isPositive: true }}
-            colorClass="bg-gradient-to-br from-green-500 to-green-600 text-white"
-          />
-        </motion.div>
+
         <motion.div variants={item}>
           <StatCard
             title="Total Due Sale"
@@ -149,14 +141,7 @@ export default function DashboardPage() {
             colorClass="bg-gradient-to-br from-teal-500 to-teal-600 text-white"
           />
         </motion.div>
-        <motion.div variants={item}>
-          <StatCard
-            title="Total Return"
-            value={45000}
-            icon={RotateCcw}
-            colorClass="bg-gradient-to-br from-red-500 to-red-600 text-white"
-          />
-        </motion.div>
+
         <motion.div variants={item}>
           <StatCard
             title="Total Expense"
@@ -174,14 +159,7 @@ export default function DashboardPage() {
             colorClass="bg-gradient-to-br from-emerald-500 to-emerald-600 text-white"
           />
         </motion.div>
-        <motion.div variants={item}>
-          <StatCard
-            title="Supplier Due"
-            value={320000}
-            icon={Truck}
-            colorClass="bg-gradient-to-br from-amber-500 to-amber-600 text-white"
-          />
-        </motion.div>
+
         <motion.div variants={item}>
           <StatCard
             title="Service Profit"
@@ -195,12 +173,11 @@ export default function DashboardPage() {
 
       {/* Quick Actions & Lists */}
       <motion.div
-        className="grid grid-cols-1 lg:grid-cols-3 gap-6"
+        className="grid grid-cols-1 lg:grid-cols-2 gap-6"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.9, duration: 0.5 }}
       >
-        <QuickActions />
         <RecentSales />
         <DueList />
       </motion.div>

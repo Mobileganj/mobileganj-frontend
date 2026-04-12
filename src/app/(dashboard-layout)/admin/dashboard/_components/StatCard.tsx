@@ -49,22 +49,7 @@ export default function StatCard({ title, value, icon: Icon, trend, colorClass }
             )} />
           </motion.div>
 
-          {trend && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2, type: "spring" }}
-              className={cn(
-                "flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold",
-                trend.isPositive
-                  ? "bg-emerald-500/20 text-emerald-600 dark:text-emerald-400"
-                  : "bg-rose-500/20 text-rose-600 dark:text-rose-400"
-              )}
-            >
-              <span className="text-sm">{trend.isPositive ? '↗' : '↘'}</span>
-              {trend.value}
-            </motion.div>
-          )}
+          {/* Trend indicators removed as per request */}
         </div>
 
         {/* Value */}

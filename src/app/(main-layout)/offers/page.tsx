@@ -164,7 +164,7 @@ export default function OffersPage() {
             </motion.div>
           </div>
 
-          <div className="container mx-auto px-4 py-12 sm:py-16 lg:py-20 relative text-white">
+          <div className="max-w-7xl mx-auto px-4 py-12 sm:py-16 lg:py-20 relative text-white">
             {/* Breadcrumb */}
             <motion.nav
               initial={{ opacity: 0, y: -10 }}
@@ -295,7 +295,7 @@ export default function OffersPage() {
 
       {/* ─── Stats Strip ─── */}
       <section className="border-b border-border/40 bg-muted/20">
-        <div className="container mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -332,9 +332,8 @@ export default function OffersPage() {
               <motion.div
                 key={stat.label}
                 variants={scaleIn}
-                className={`flex flex-col items-center justify-center py-8 sm:py-10 ${
-                  i < 3 ? "border-r border-border/40" : ""
-                }`}
+                className={`flex flex-col items-center justify-center py-8 sm:py-10 ${i < 3 ? "border-r border-border/40" : ""
+                  }`}
               >
                 <stat.icon className={`h-5 w-5 ${stat.color} mb-2`} />
                 <p className="text-2xl sm:text-3xl font-bold">{stat.value}</p>
@@ -347,7 +346,7 @@ export default function OffersPage() {
         </div>
       </section>
 
-      <div className="container mx-auto px-4">
+      <div className="max-w-7xl mx-auto px-4">
         {/* ─── Sort & Filter Bar ─── */}
         <section className="py-6 sm:py-8">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -368,11 +367,10 @@ export default function OffersPage() {
                 <button
                   key={option.value}
                   onClick={() => setSortBy(option.value)}
-                  className={`text-xs px-3 py-1.5 rounded-full border transition-all ${
-                    sortBy === option.value
-                      ? "bg-primary text-primary-foreground border-primary"
-                      : "border-border/60 text-muted-foreground hover:border-primary/40 hover:text-foreground"
-                  }`}
+                  className={`text-xs px-3 py-1.5 rounded-full border transition-all ${sortBy === option.value
+                    ? "bg-primary text-primary-foreground border-primary"
+                    : "border-border/60 text-muted-foreground hover:border-primary/40 hover:text-foreground"
+                    }`}
                 >
                   {option.label}
                 </button>
@@ -508,7 +506,7 @@ export default function OffersPage() {
 
       {/* ─── Bottom CTA ─── */}
       <section className="bg-gradient-to-br from-primary/5 via-primary/10 to-primary/5 border-t border-border/40">
-        <div className="container mx-auto px-4 py-12 sm:py-16">
+        <div className="max-w-7xl mx-auto px-4 py-12 sm:py-16">
           <motion.div
             initial="hidden"
             whileInView="visible"

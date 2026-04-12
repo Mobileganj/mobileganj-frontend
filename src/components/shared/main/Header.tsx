@@ -119,18 +119,7 @@ const navItems: NavItem[] = [
     href: "/sell-phone",
     icon: <Tag className="h-4 w-4" />,
   },
-  {
-    label: "Pre-Order",
-    href: "/pre-order",
-    icon: <Gift className="h-4 w-4" />,
-    highlight: true,
-  },
-  {
-    label: "Offers",
-    href: "/offers",
-    icon: <Sparkles className="h-4 w-4" />,
-    highlight: true,
-  },
+
   { label: "EMI", href: "/emi", icon: <CreditCard className="h-4 w-4" /> },
   { label: "Contact", href: "/contact", icon: <MapPin className="h-4 w-4" /> },
 ];
@@ -364,6 +353,25 @@ function UserButton() {
   const { user, isAuthenticated } = useAuthStore();
   const logout = useLogout();
   const ADMIN_ROLES = ["superadmin", "admin", "staff"];
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return (
+      <Button
+        variant="ghost"
+        size="default"
+        className="hidden md:inline-flex opacity-0"
+      >
+        <div className="flex h-7 w-7 items-center justify-center rounded-full bg-muted">
+          <User className="h-4 w-4" />
+        </div>
+      </Button>
+    );
+  }
 
   if (!isAuthenticated || !user) {
     return (
@@ -371,7 +379,7 @@ function UserButton() {
         <Button
           variant="ghost"
           size="default"
-          className="gap-2 text-sm rounded-full hover:bg-accent px-3"
+          className="gap-2 text-sm rounded-full hover:bg-accent px-3 text-white"
         >
           <div className="flex h-7 w-7 items-center justify-center rounded-full bg-muted">
             <User className="h-4 w-4" />
@@ -394,7 +402,7 @@ function UserButton() {
         <Button
           variant="ghost"
           size="default"
-          className="hidden md:inline-flex gap-2 text-sm rounded-full hover:bg-accent px-3"
+          className="hidden md:inline-flex gap-2 text-sm rounded-full hover:bg-accent px-3 text-white"
         >
           <div className="flex h-7 w-7 items-center justify-center rounded-full bg-primary text-primary-foreground text-xs font-bold">
             {user.name.charAt(0).toUpperCase()}
@@ -405,7 +413,7 @@ function UserButton() {
           <ChevronDown className="h-3 w-3" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-48">
+      <DropdownMenuContent align="end" className="dark w-48 bg-popover text-popover-foreground">
         <div className="px-3 py-2">
           <p className="text-sm font-semibold truncate">{user.name}</p>
           <p className="text-xs text-muted-foreground truncate">
@@ -443,6 +451,7 @@ export default function Header() {
   const { user, isAuthenticated } = useAuthStore();
   const logout = useLogout();
   const ADMIN_ROLES = ["superadmin", "admin", "staff"];
+  const [isMounted, setIsMounted] = useState(false);
 
   const scheduleClose = () => {
     if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
@@ -459,7 +468,9 @@ export default function Header() {
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [pathname]);
+
   useEffect(() => {
+    setIsMounted(true);
     return () => {
       if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
     };
@@ -467,10 +478,10 @@ export default function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
+      <header className="dark text-foreground sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 ">
         {/* ─── Top Bar ─── */}
-        <div className="bg-primary text-primary-foreground">
-          <div className="container mx-auto px-4 flex justify-between items-center text-xs sm:text-sm h-9">
+        <div className="bg-primary text-primary-foreground ">
+          <div className="max-w-7xl mx-auto px-4 flex justify-between items-center text-xs h-9">
             <div className="flex items-center gap-2">
               <Zap className="h-3.5 w-3.5" />
               <p className="hidden sm:block">
@@ -514,7 +525,7 @@ export default function Header() {
 
         {/* ─── Main Header ─── */}
         <div className="border-b bg-background">
-          <div className="container mx-auto px-4 h-16 flex items-center">
+          <div className="max-w-7xl mx-auto px-4 h-16 flex items-center">
             <Link href="/" className="shrink-0 mr-8 scale-200 ml-10">
               <img
                 src="/logo.png"
@@ -547,13 +558,13 @@ export default function Header() {
             </div>
 
             <div className="flex items-center gap-1 shrink-0 ml-auto">
-              <ThemeToggle />
+              <ThemeToggle className="text-white" />
 
               <Link href="/offers" className="hidden md:inline-flex">
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="relative rounded-full hover:bg-accent"
+                  className="relative rounded-full hover:bg-accent text-white"
                 >
                   <Heart className="h-[18px] w-[18px]" />
                 </Button>
@@ -569,10 +580,10 @@ export default function Header() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="relative rounded-full hover:bg-accent"
+                  className="relative rounded-full hover:bg-accent text-white"
                 >
                   <ShoppingCart className="h-[18px] w-[18px]" />
-                  {totalItems > 0 && (
+                  {isMounted && totalItems > 0 && (
                     <span className="absolute -top-0.5 -right-0.5 h-[18px] min-w-[18px] rounded-full bg-red-500 text-white text-[10px] flex items-center justify-center font-bold px-1">
                       {totalItems}
                     </span>
@@ -583,7 +594,7 @@ export default function Header() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="md:hidden rounded-full"
+                className="md:hidden rounded-full text-white"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               >
                 {mobileMenuOpen ? (
@@ -607,9 +618,9 @@ export default function Header() {
         </div>
 
         {/* ─── Desktop Nav ─── */}
-        <nav className="hidden md:block border-b bg-background/80 backdrop-blur-sm py-2">
-          <div className="container mx-auto px-4">
-            <div className="flex items-center">
+        <nav className="hidden md:block border-b bg-background/80 backdrop-blur-sm">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="flex items-center justify-center gap-2">
               {navItems.map((item) => (
                 <DesktopMegaMenu
                   key={item.label}
@@ -645,7 +656,7 @@ export default function Header() {
               animate={{ x: 0 }}
               exit={{ x: "-100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="fixed top-0 left-0 bottom-0 w-[85%] max-w-sm bg-background z-70 md:hidden overflow-y-auto"
+              className="dark fixed top-0 left-0 bottom-0 w-[85%] max-w-sm bg-background text-foreground z-70 md:hidden overflow-y-auto"
             >
               <div className="flex items-center justify-between p-4 border-b">
                 <Link
@@ -670,7 +681,7 @@ export default function Header() {
               </div>
 
               <div className="p-4 border-b">
-                {isAuthenticated && user ? (
+                {isMounted && isAuthenticated && user ? (
                   <div className="space-y-2">
                     <div className="flex items-center gap-3 p-3 rounded-xl bg-accent/50">
                       <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground font-bold">

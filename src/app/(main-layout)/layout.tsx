@@ -2,6 +2,7 @@ import { ReactNode } from "react"
 import Header from "@/components/shared/main/Header"
 import Footer from "@/components/shared/main/Footer"
 import FloatingContact from "@/components/shared/main/FloatingContact"
+import ScrollToTop from "@/components/shared/main/ScrollToTop"
 import BottomNav from "@/components/shared/BottomNav"
 
 const MainLayout = ({ children, authModal, cartModal }: { children: ReactNode; authModal: ReactNode; cartModal: ReactNode }) => {
@@ -11,6 +12,7 @@ const MainLayout = ({ children, authModal, cartModal }: { children: ReactNode; a
       <main className="flex-1 pb-20 md:pb-0">{children}</main>
       <Footer />
       <FloatingContact />
+      <ScrollToTop />
       <BottomNav />
       {authModal}
       {cartModal}

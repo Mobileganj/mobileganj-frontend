@@ -154,7 +154,7 @@ export default function PreOrderPage() {
             </motion.div>
           </div>
 
-          <div className="container mx-auto px-4 py-12 sm:py-16 lg:py-20 relative text-white">
+          <div className="max-w-7xl mx-auto px-4 py-12 sm:py-16 lg:py-20 relative text-white">
             {/* Breadcrumb */}
             <motion.nav
               initial={{ opacity: 0, y: -10 }}
@@ -314,7 +314,7 @@ export default function PreOrderPage() {
 
       {/* ─── Stats Strip ─── */}
       <section className="border-b border-border/40 bg-muted/20">
-        <div className="container mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-3">
             {[
               { icon: Globe, value: "Any Phone", label: "From Dubai", color: "text-blue-500" },
@@ -332,7 +332,7 @@ export default function PreOrderPage() {
         </div>
       </section>
 
-      <div className="container mx-auto px-4">
+      <div className="max-w-7xl mx-auto px-4">
 
         {/* ─── Terms & Conditions ─── */}
         <section className="pb-12 sm:pb-16">
@@ -540,7 +540,7 @@ export default function PreOrderPage() {
 
       {/* ─── Bottom CTA ─── */}
       <section className="bg-gradient-to-br from-indigo-600/5 via-violet-600/10 to-blue-600/5 border-t border-border/40">
-        <div className="container mx-auto px-4 py-12 sm:py-16">
+        <div className="max-w-7xl mx-auto px-4 py-12 sm:py-16">
           <motion.div
             initial="hidden"
             whileInView="visible"

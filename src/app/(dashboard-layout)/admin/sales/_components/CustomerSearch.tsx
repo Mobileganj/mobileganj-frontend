@@ -36,13 +36,13 @@ export default function CustomerSearch() {
   };
 
   return (
-    <div className="card-base p-6 space-y-4">
+    <div className="card-base p-4 space-y-3">
       <div className="flex items-center justify-between">
-        <h3 className="font-semibold text-lg">Customer Information</h3>
+        <h3 className="font-semibold text-base">Customer Information</h3>
         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
           <DialogTrigger asChild>
-            <Button size="sm" variant="outline">
-              <UserPlus className="w-4 h-4 mr-2" />
+            <Button size="sm" variant="outline" className="h-8 text-xs">
+              <UserPlus className="w-3.5 h-3.5 mr-1.5" />
               Add Customer
             </Button>
           </DialogTrigger>
@@ -92,34 +92,38 @@ export default function CustomerSearch() {
           </DialogContent>
         </Dialog>
       </div>
-      
-      <div>
-        <Label>Customer Phone *</Label>
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-          <Input 
-            placeholder="Enter phone number" 
-            className="pl-10"
-            value={phone}
-            onChange={(e) => handlePhoneChange(e.target.value)}
-            required
-          />
-        </div>
-      </div>
 
-      {showNewCustomer && (
-        <div className="space-y-4 pt-2 border-t">
-          <p className="text-sm text-muted-foreground">New customer - Please provide details</p>
-          <div>
-            <Label>Customer Name *</Label>
-            <Input placeholder="Enter customer name" required />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+        <div className="space-y-1.5">
+          <Label className="text-xs">Customer Phone *</Label>
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            <Input
+              placeholder="Enter phone number"
+              className="pl-9 h-9 text-sm"
+              value={phone}
+              onChange={(e) => handlePhoneChange(e.target.value)}
+              required
+            />
           </div>
-          <div>
-            <Label>Address</Label>
-            <Input placeholder="Enter address (optional)" />
-          </div>
+          {showNewCustomer && (
+            <p className="text-[10px] text-primary mt-0.5 absolute font-medium animate-in fade-in">New customer detected</p>
+          )}
         </div>
-      )}
+
+        {showNewCustomer && (
+          <>
+            <div className="space-y-1.5 animate-in fade-in slide-in-from-left-2 md:slide-in-from-bottom-2">
+              <Label className="text-xs">Customer Name *</Label>
+              <Input placeholder="Enter customer name" required className="h-9 text-sm" />
+            </div>
+            <div className="space-y-1.5 animate-in fade-in slide-in-from-left-2 md:slide-in-from-bottom-2">
+              <Label className="text-xs">Address</Label>
+              <Input placeholder="Enter address (optional)" className="h-9 text-sm" />
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 }

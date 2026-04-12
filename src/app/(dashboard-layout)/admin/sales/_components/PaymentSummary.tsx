@@ -14,10 +14,10 @@ export default function PaymentSummary({ subtotal }: PaymentSummaryProps) {
   const [discountType, setDiscountType] = useState<'fixed' | 'percent'>('fixed');
   const [paid, setPaid] = useState(0);
 
-  const discountAmount = discountType === 'percent' 
-    ? (subtotal * discount) / 100 
+  const discountAmount = discountType === 'percent'
+    ? (subtotal * discount) / 100
     : discount;
-  
+
   const grandTotal = subtotal - discountAmount;
   const due = grandTotal - paid;
 
@@ -35,8 +35,8 @@ export default function PaymentSummary({ subtotal }: PaymentSummaryProps) {
       <div className="space-y-2">
         <Label>Discount</Label>
         <div className="flex gap-2">
-          <Input 
-            type="number" 
+          <Input
+            type="number"
             placeholder="0"
             value={discount || ''}
             onChange={(e) => setDiscount(Number(e.target.value))}
@@ -67,8 +67,8 @@ export default function PaymentSummary({ subtotal }: PaymentSummaryProps) {
       {/* Paid Amount */}
       <div>
         <Label>Paid Amount *</Label>
-        <Input 
-          type="number" 
+        <Input
+          type="number"
           placeholder="0"
           value={paid || ''}
           onChange={(e) => setPaid(Number(e.target.value))}
@@ -100,23 +100,47 @@ export default function PaymentSummary({ subtotal }: PaymentSummaryProps) {
         </Select>
       </div>
 
-      {/* Due Date (if due) */}
+      {/* Due Details (if due) */}
       {due > 0 && (
-        <div>
-          <Label>Due Date</Label>
-          <Input type="date" />
+        <div className="space-y-4 pt-2 border-t border-dashed">
+          <div>
+            <Label>Customer NID</Label>
+            <Input type="number" placeholder="Enter NID Number (Optional)" />
+            <p className="text-xs text-muted-foreground mt-1">Recommended for tracking due sales.</p>
+          </div>
+          <div>
+            <Label>Due Date</Label>
+            <Input type="date" />
+          </div>
         </div>
       )}
 
-      {/* Status Badge */}
+      {/* Sale Status */}
+      <div>
+        <Label>Sale Status *</Label>
+        <Select defaultValue="Complete">
+          <SelectTrigger>
+            <SelectValue placeholder="Select sale status" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="Complete">Complete</SelectItem>
+            <SelectItem value="Due">Due</SelectItem>
+            <SelectItem value="Advanced Pay">Advanced Pay</SelectItem>
+          </SelectContent>
+        </Select>
+        <p className="text-xs text-muted-foreground mt-1">
+          'Advanced Pay' reserves the invoice but does not deduct stock.
+        </p>
+      </div>
+
+      {/* Payment Status Badge */}
       <div className="pt-3 border-t">
         <div className="flex items-center justify-between">
-          <span className="text-sm text-muted-foreground">Status</span>
-          <span className={`text-sm px-3 py-1 rounded-full font-medium ${
-            due === 0 ? 'bg-green-100 text-green-700' :
+          <span className="text-sm text-muted-foreground">Payment Status</span>
+          <span className={`text-sm px-3 py-1 rounded-full font-medium ${due === 0 ? 'bg-green-100 text-green-700' :
             paid > 0 ? 'bg-yellow-100 text-yellow-700' :
-            'bg-red-100 text-red-700'
-          }`}>
+              'bg-red-100 text-red-700'
+            }`}>
             {due === 0 ? 'Paid' : paid > 0 ? 'Partial Paid' : 'Due'}
           </span>
         </div>

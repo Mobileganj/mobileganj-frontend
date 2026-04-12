@@ -74,6 +74,7 @@ import {
   Store,
   Smartphone,
   Headphones,
+  ChevronLeft,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -92,7 +93,6 @@ const menuItems = [
       { icon: List, label: "All Products", href: "/admin/products" },
       { icon: Tag, label: "Brands", href: "/admin/products/brands" },
       { icon: FolderTree, label: "Categories", href: "/admin/products/categories" },
-      { icon: Layers, label: "Variants", href: "/admin/products/variants" },
       { icon: AlertTriangle, label: "Damages", href: "/admin/products/damage" },
       { icon: Barcode, label: "Print Barcode", href: "/admin/products/barcode" },
       { icon: Settings2, label: "Settings", href: "/admin/products/settings" },
@@ -105,7 +105,7 @@ const menuItems = [
     submenu: [
       { icon: Plus, label: "New Sale", href: "/admin/sales/new" },
       { icon: Receipt, label: "All Sales", href: "/admin/sales" },
-      { icon: Shield, label: "Warranty Settings", href: "/admin/sales/warranty-settings" },
+      { icon: FileText, label: "Invoice Settings", href: "/admin/sales/invoice-settings" },
       { icon: RotateCcw, label: "Returns", href: "/admin/sales/returns" },
     ]
   },
@@ -268,6 +268,17 @@ const menuItems = [
     ]
   },
   { divider: true },
+  {
+    icon: ShieldCheck,
+    label: "Staff Management",
+    href: "/admin/staff",
+    submenu: [
+      { icon: UserPlus, label: "Invite Staff", href: "/admin/staff/new" },
+      { icon: Users, label: "All Staffs", href: "/admin/staff" },
+      { icon: Shield, label: "Roles & Permissions", href: "/admin/staff/roles" },
+    ]
+  },
+  { divider: true },
   { 
     icon: Globe,
     label: "Website",
@@ -329,6 +340,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const logout = useLogout();
   const { user } = useAuthStore();
   const [expandedMenus, setExpandedMenus] = useState<string[]>([]);
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   const toggleMenu = (label: string) => {
     setExpandedMenus(prev => 
@@ -351,37 +363,37 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
       {/* Sidebar */}
       <aside
         className={cn(
-          "fixed lg:sticky top-0 left-0 z-50 w-64 bg-card border-r h-screen flex flex-col transition-transform duration-300",
+          "fixed lg:sticky top-0 left-0 z-50 bg-card border-r h-screen flex flex-col transition-all duration-300 shrink-0",
           isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0",
+          isCollapsed ? "lg:w-20 w-64" : "w-64"
         )}
       >
-        {/* Logo */}
-        <div className="p-6 border-b flex items-center justify-center relative overflow-hidden">
-          <Link
-            href="/admin/dashboard"
-            className="flex items-center justify-center w-full"
-          >
-            <img
-              src="/logo.png"
-              alt="Mobile GANJ"
-              className="h-10 w-auto object-contain scale-200 logo-adaptive"
-            />
-          </Link>
+        {/* Header */}
+        <div className={cn("p-4 border-b flex items-center relative overflow-hidden min-h-[80px]", isCollapsed ? "justify-center px-0" : "justify-between")}>
+          <div className={cn("transition-all duration-300 overflow-hidden flex flex-col items-center", isCollapsed ? "w-0 opacity-0" : "flex-1 opacity-100")}>
+            <Link href="/admin/dashboard" className="flex items-center justify-center w-full">
+              <img src="/logo.png" alt="Mobile GANJ" className="h-10 w-auto object-contain scale-125 logo-adaptive" />
+            </Link>
+            <span className="text-[10px] text-muted-foreground font-medium mt-2">POS SYSTEM</span>
+          </div>
+
           <Button
             variant="ghost"
             size="icon"
-            className="lg:hidden absolute right-2"
-            onClick={onClose}
+            className={cn("hidden lg:flex shrink-0 z-10 text-muted-foreground hover:text-foreground", isCollapsed ? "mx-auto" : "absolute right-2")}
+            onClick={() => setIsCollapsed(!isCollapsed)}
+            title={isCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
           >
+            {isCollapsed ? <ChevronRight className="w-5 h-5" /> : <ChevronLeft className="w-5 h-5" />}
+          </Button>
+
+          <Button variant="ghost" size="icon" className="lg:hidden absolute right-2 bg-background/80" onClick={onClose}>
             <X className="w-5 h-5" />
           </Button>
         </div>
-        <p className="px-6 text-xs text-muted-foreground text-center -mt-6 mb-4">
-          POS System
-        </p>
 
         {/* Menu */}
-        <nav className="flex-1 overflow-y-auto p-2 text-sm">
+        <nav className={cn("flex-1 overflow-y-auto overflow-x-hidden p-2 text-sm", isCollapsed && "[&::-webkit-scrollbar]:!hidden [-ms-overflow-style:none] [scrollbar-width:none]")}>
           {menuItems.map((item, index) => {
             // Render divider
             if ('divider' in item && item.divider) {
@@ -403,24 +415,31 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                 {hasSubmenu ? (
                   <>
                     <button
-                      onClick={() => toggleMenu(item.label ?? '')}
+                      onClick={() => {
+                        if (isCollapsed) setIsCollapsed(false);
+                        toggleMenu(item.label ?? '');
+                      }}
                       className={cn(
-                        "w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200",
+                        "flex items-center rounded-lg transition-all duration-200",
+                        isCollapsed ? "w-11 h-11 mx-auto justify-center px-0" : "w-full px-4 py-3 gap-3",
                         isActive
                           ? "bg-primary text-primary-foreground"
                           : "hover:bg-accent text-muted-foreground hover:text-foreground",
                       )}
+                      title={isCollapsed ? item.label : undefined}
                     >
-                      <Icon className="w-5 h-5 shrink-0" />
-                      <span className="font-medium flex-1 text-left">{item.label ?? ''}</span>
-                      <ChevronDown className={cn(
-                        "w-4 h-4 transition-transform duration-200",
-                        isExpanded ? "rotate-0" : "-rotate-90"
-                      )} />
+                      <Icon className={cn("shrink-0", isCollapsed ? "w-5 h-5" : "w-5 h-5")} />
+                      <div className={cn("flex items-center overflow-hidden transition-all duration-300", isCollapsed ? "w-0 opacity-0" : "flex-1 opacity-100 ml-3")}>
+                        <span className="font-medium flex-1 text-left whitespace-nowrap">{item.label ?? ''}</span>
+                        <ChevronDown className={cn(
+                          "w-4 h-4 shrink-0 transition-transform duration-200",
+                          isExpanded && !isCollapsed ? "rotate-0" : "-rotate-90"
+                        )} />
+                      </div>
                     </button>
                     <div className={cn(
                       "overflow-hidden transition-all duration-300 ease-in-out",
-                      isExpanded ? "max-h-[600px] opacity-100 mt-1" : "max-h-0 opacity-0"
+                      (isExpanded && !isCollapsed) ? "max-h-[800px] opacity-100 mt-1" : "max-h-0 opacity-0"
                     )}>
                       <div className="ml-4 space-y-1">
                         {'submenu' in item && item.submenu?.map((subItem: any, subIndex: number) => {
@@ -498,20 +517,24 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                   <Link
                     href={item.href ?? '#'}
                     onClick={onClose}
+                    title={isCollapsed ? item.label : undefined}
                     className={cn(
-                      "flex items-center gap-3 px-4 py-3 rounded-lg transition-colors",
+                      "flex items-center rounded-lg transition-all duration-200",
+                      isCollapsed ? "w-11 h-11 mx-auto justify-center px-0" : "w-full px-4 py-3 gap-3",
                       isActive
                         ? "bg-primary text-primary-foreground"
                         : "hover:bg-accent text-muted-foreground hover:text-foreground",
                     )}
                   >
-                    <Icon className="w-5 h-5 shrink-0" />
-                    <span className="font-medium">{item.label ?? ''}</span>
-                    {'adminOnly' in item && item.adminOnly && (
-                      <span className="ml-auto text-xs bg-orange-500 text-white px-2 py-0.5 rounded">
-                        Admin
-                      </span>
-                    )}
+                    <Icon className={cn("shrink-0", isCollapsed ? "w-5 h-5" : "w-5 h-5")} />
+                    <div className={cn("flex items-center overflow-hidden transition-all duration-300", isCollapsed ? "w-0 opacity-0" : "flex-1 opacity-100 ml-3")}>
+                      <span className="font-medium flex-1 whitespace-nowrap">{item.label ?? ''}</span>
+                      {'adminOnly' in item && item.adminOnly && (
+                        <span className="ml-auto shrink-0 text-[10px] bg-orange-500 text-white px-1.5 py-0.5 rounded">
+                          Admin
+                        </span>
+                      )}
+                    </div>
                   </Link>
                 )}
               </div>
@@ -520,31 +543,49 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         </nav>
 
         {/* Footer */}
-        <div className="p-4 border-t text-sm space-y-1">
+        <div className="p-4 border-t text-sm space-y-2">
           <Link
             href="/"
             target="_blank"
             onClick={onClose}
-            className="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/10 text-primary hover:text-primary transition-colors"
+            title={isCollapsed ? "Visit Website" : undefined}
+            className={cn(
+              "flex items-center rounded-lg transition-colors",
+              isCollapsed ? "w-11 h-11 mx-auto justify-center p-0 hover:bg-primary/10 text-primary" : "px-4 py-2 gap-3 hover:bg-primary/10 text-primary hover:text-primary",
+            )}
           >
-            <Home className="w-5 h-5" />
-            <span className="font-medium">Visit Website</span>
-            <ExternalLink className="w-3.5 h-3.5 ml-auto opacity-50" />
+            <Home className={cn("shrink-0", isCollapsed ? "w-5 h-5" : "w-5 h-5")} />
+            <div className={cn("flex items-center overflow-hidden transition-all duration-300", isCollapsed ? "w-0 opacity-0" : "flex-1 opacity-100 ml-3")}>
+               <span className="font-medium whitespace-nowrap">Visit Website</span>
+               <ExternalLink className="w-3.5 h-3.5 ml-auto opacity-50 shrink-0" />
+            </div>
           </Link>
           <Link
             href="/admin/settings"
             onClick={onClose}
-            className="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-accent text-muted-foreground hover:text-foreground transition-colors"
+            title={isCollapsed ? "Settings" : undefined}
+            className={cn(
+               "flex items-center rounded-lg transition-colors",
+               isCollapsed ? "w-11 h-11 mx-auto justify-center p-0 hover:bg-accent text-muted-foreground hover:text-foreground" : "px-4 py-2 gap-3 hover:bg-accent text-muted-foreground hover:text-foreground",
+            )}
           >
-            <Settings className="w-5 h-5" />
-            <span className="font-medium">Settings</span>
+            <Settings className={cn("shrink-0", isCollapsed ? "w-5 h-5" : "w-5 h-5")} />
+            <div className={cn("flex items-center overflow-hidden transition-all duration-300", isCollapsed ? "w-0 opacity-0" : "flex-1 opacity-100 ml-3")}>
+               <span className="font-medium whitespace-nowrap">Settings</span>
+            </div>
           </Link>
           <button
             onClick={() => logout.mutate()}
-            className="w-full flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-destructive/10 text-destructive transition-colors"
+            title={isCollapsed ? "Logout" : undefined}
+            className={cn(
+               "w-full flex items-center rounded-lg transition-colors",
+               isCollapsed ? "w-11 h-11 mx-auto justify-center p-0 hover:bg-destructive/10 text-destructive" : "px-4 py-2 gap-3 hover:bg-destructive/10 text-destructive",
+            )}
           >
-            <LogOut className="w-5 h-5" />
-            <span className="font-medium">Logout</span>
+            <LogOut className={cn("shrink-0", isCollapsed ? "w-5 h-5" : "w-5 h-5")} />
+            <div className={cn("flex items-center overflow-hidden transition-all duration-300", isCollapsed ? "w-0 opacity-0" : "flex-1 opacity-100 ml-3")}>
+               <span className="font-medium whitespace-nowrap">Logout</span>
+            </div>
           </button>
         </div>
       </aside>

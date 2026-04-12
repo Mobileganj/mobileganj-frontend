@@ -44,7 +44,7 @@ const testimonials = [
 
 export default function TestimonialsSection() {
   return (
-    <section className="py-12">
+    <section className="max-w-7xl mx-auto py-12">
       <div className="text-center mb-10">
         <h2 className="text-2xl md:text-3xl font-bold mb-2">
           What Our <span className="text-primary">Customers</span> Say
@@ -78,11 +78,10 @@ export default function TestimonialsSection() {
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Star
                     key={i}
-                    className={`w-3.5 h-3.5 ${
-                      i < t.rating
+                    className={`w-3.5 h-3.5 ${i < t.rating
                         ? "text-yellow-500 fill-yellow-500"
                         : "text-muted-foreground/30"
-                    }`}
+                      }`}
                   />
                 ))}
               </div>

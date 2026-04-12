@@ -9,7 +9,7 @@ import TestimonialsSection from "./_components/TestimonialsSection";
 const HomePage = () => {
   return (
     <div>
-      <div className="container mx-auto px-4 py-6">
+      <div className="max-w-7xl mx-auto px-4 py-6">
         {/* Hero Slider */}
         <HeroBanner />
 

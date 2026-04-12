@@ -1,11 +1,21 @@
 'use client';
 
 import { useState } from 'react';
-import { Search, Eye, RotateCcw } from 'lucide-react';
+import { Search, Eye, RotateCcw, Plus, Edit } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { motion } from 'framer-motion';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+} from "@/components/ui/dialog";
 
 const mockReturns = [
   { id: 'RET-001', invoiceNo: 'INV-001', date: '2024-01-29', customer: 'Karim Ahmed', product: 'iPhone 15 Pro', amount: 145000, reason: 'Defective', status: 'Pending' },
@@ -31,6 +41,75 @@ export default function ReturnsPage() {
           <h1 className="text-3xl font-bold">Returns & Refunds</h1>
           <p className="text-muted-foreground">Manage product returns and refunds</p>
         </div>
+        
+        {/* ADD NEW RETURN MODAL */}
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button>
+              <Plus className="w-4 h-4 mr-2" />
+              New Return Request
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="max-w-lg">
+            <DialogHeader>
+              <DialogTitle>Create Return Request</DialogTitle>
+            </DialogHeader>
+            <div className="space-y-4 py-4">
+              <div className="space-y-2">
+                <Label>Invoice Number</Label>
+                <div className="flex gap-2">
+                  <Input placeholder="Enter INV-XXX" />
+                  <Button variant="secondary">Fetch Data</Button>
+                </div>
+              </div>
+              <div className="space-y-2">
+                <Label>Select Product to Return</Label>
+                <Select>
+                  <SelectTrigger><SelectValue placeholder="Select product" /></SelectTrigger>
+                  <SelectContent>
+                     {/* Mock products that would be loaded from invoice */}
+                    <SelectItem value="p1">iPhone 15 Pro Max</SelectItem>
+                    <SelectItem value="p2">Apple Charger 20W</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <Label>Return Reason</Label>
+                <Select>
+                  <SelectTrigger><SelectValue placeholder="Select reason" /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="defective">Defective / Damaged</SelectItem>
+                    <SelectItem value="wrong">Wrong Product Shipped</SelectItem>
+                    <SelectItem value="changed_mind">Changed Mind</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label>Refund Amount (৳)</Label>
+                  <Input type="number" placeholder="0" />
+                </div>
+                <div className="space-y-2">
+                  <Label>Deduct from Stock?</Label>
+                  <Select defaultValue="yes">
+                    <SelectTrigger><SelectValue /></SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="yes">Yes, restock it</SelectItem>
+                      <SelectItem value="no">No, mark as damage</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+              <div className="space-y-2">
+                <Label>Additional Notes</Label>
+                <Textarea placeholder="Any remarks..." />
+              </div>
+            </div>
+            <DialogFooter>
+              <Button type="submit">Submit Request</Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
 
       <div className="grid grid-cols-4 gap-4">
@@ -126,14 +205,48 @@ export default function ReturnsPage() {
                   </td>
                   <td className="p-4">
                     <div className="flex items-center justify-center gap-2">
-                      <Button variant="ghost" size="icon">
+                      <Button variant="ghost" size="icon" title="View details">
                         <Eye className="w-4 h-4" />
                       </Button>
-                      {ret.status === 'Pending' && (
-                        <Button variant="ghost" size="icon" className="text-green-600">
-                          <RotateCcw className="w-4 h-4" />
-                        </Button>
-                      )}
+                      
+                      {/* EDIT RETURN MODAL */}
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <Button variant="ghost" size="icon" className="text-blue-600" title="Process / Edit Return">
+                            <Edit className="w-4 h-4" />
+                          </Button>
+                        </DialogTrigger>
+                        <DialogContent className="max-w-md">
+                          <DialogHeader>
+                            <DialogTitle>Process Return ({ret.id})</DialogTitle>
+                          </DialogHeader>
+                          <div className="space-y-4 py-4">
+                            <div className="space-y-2">
+                              <Label>Update Status</Label>
+                              <Select defaultValue={ret.status.toLowerCase()}>
+                                <SelectTrigger><SelectValue placeholder="Select status" /></SelectTrigger>
+                                <SelectContent>
+                                  <SelectItem value="pending">Pending</SelectItem>
+                                  <SelectItem value="approved">Approved</SelectItem>
+                                  <SelectItem value="refunded">Refunded (Completed)</SelectItem>
+                                  <SelectItem value="rejected">Rejected</SelectItem>
+                                </SelectContent>
+                              </Select>
+                            </div>
+                            <div className="space-y-2">
+                              <Label>Refund Amount (৳)</Label>
+                              <Input type="number" defaultValue={ret.amount} />
+                            </div>
+                            <div className="space-y-2">
+                              <Label>Admin Notes</Label>
+                              <Textarea placeholder="Notes regarding the refund..." />
+                            </div>
+                          </div>
+                          <DialogFooter>
+                            <Button type="submit">Update Return</Button>
+                          </DialogFooter>
+                        </DialogContent>
+                      </Dialog>
                     </div>
                   </td>
                 </motion.tr>

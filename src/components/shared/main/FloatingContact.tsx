@@ -64,14 +64,14 @@ export default function FloatingContact() {
       </AnimatePresence>
 
       <Button
-        size="icon-lg"
-        className="rounded-full shadow-2xl bg-primary hover:bg-primary/90 h-12 w-12 md:h-14 md:w-14"
+        size="icon"
+        className="rounded-full shadow-2xl bg-primary hover:bg-primary/90 h-10 w-10 md:h-12 md:w-12"
         onClick={() => setIsOpen(!isOpen)}
       >
         {isOpen ? (
-          <X className="h-5 w-5 md:h-6 md:w-6" />
+          <X className="h-4 w-4 md:h-5 md:w-5" />
         ) : (
-          <MessageCircle className="h-5 w-5 md:h-6 md:w-6" />
+          <MessageCircle className="h-4 w-4 md:h-5 md:w-5" />
         )}
       </Button>
     </div>

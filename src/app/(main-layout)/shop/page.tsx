@@ -31,7 +31,7 @@ export default function ShopPage() {
   return (
     <div>
       {/* Hero Banner — just a visual banner, no text */}
-      <div className="w-full h-48 md:h-64 bg-gradient-to-r from-emerald-700 via-teal-600 to-cyan-600 overflow-hidden relative">
+      <div className="w-full h-30 md:h-38 bg-gradient-to-r from-emerald-700 via-teal-600 to-cyan-600 overflow-hidden relative">
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/4" />
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/4" />
@@ -39,7 +39,7 @@ export default function ShopPage() {
       </div>
 
       {/* Main Content */}
-      <div className="container mx-auto px-4 py-8">
+      <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="flex gap-6 lg:gap-8">
           {/* Desktop Sidebar */}
           <aside className="hidden lg:block w-64 flex-shrink-0">
@@ -71,7 +71,7 @@ export default function ShopPage() {
                     </Button>
                   </SheetTrigger>
                   <SheetContent side="left" className="w-80 overflow-y-auto">
-                    <FilterSidebar isMobile onClose={() => {}} />
+                    <FilterSidebar isMobile onClose={() => { }} />
                   </SheetContent>
                 </Sheet>
                 <p className="text-sm text-muted-foreground">

@@ -6,7 +6,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans), var(--font-bangla);
+  --font-sans: var(--font-inter), var(--font-bangla);
   --font-mono: var(--font-geist-mono);
   --font-bangla: var(--font-bangla);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -45,65 +45,102 @@
 }
 
 :root {
-  --radius: 0.75rem;
-  --background: oklch(100% 0 0);
-  --foreground: oklch(15% 0.01 240);
-  --card: oklch(100% 0 0);
-  --card-foreground: oklch(15% 0.01 240);
-  --popover: oklch(100% 0 0);
-  --popover-foreground: oklch(15% 0.01 240);
-  --primary: oklch(60% 0.18 195);
-  --primary-foreground: oklch(100% 0 0);
-  --secondary: oklch(96% 0.01 195);
-  --secondary-foreground: oklch(15% 0.01 195);
-  --muted: oklch(96% 0.01 195);
-  --muted-foreground: oklch(50% 0.01 195);
-  --accent: oklch(96% 0.01 195);
-  --accent-foreground: oklch(15% 0.01 195);
-  --destructive: oklch(55% 0.22 25);
-  --border: oklch(90% 0.005 195);
-  --input: oklch(90% 0.005 195);
-  --ring: oklch(60% 0.18 195);
-  --chart-1: oklch(60% 0.18 240);
-  --chart-2: oklch(55% 0.15 180);
-  --chart-3: oklch(50% 0.12 150);
-  --chart-4: oklch(65% 0.16 280);
-  --chart-5: oklch(60% 0.18 320);
+  /* ── Apple Gadgets BD Theme — Light Mode ── */
+  --radius: 0.5rem;
+
+  /* Backgrounds */
+  --background: #ffffff;                    /* Pure white page bg */
+  --foreground: #111827;                    /* Gray-900 — main text */
+
+  /* Cards & Popovers */
+  --card: #ffffff;
+  --card-foreground: #111827;
+  --popover: #ffffff;
+  --popover-foreground: #111827;
+
+  /* Primary — Orange brand accent (#F97316 = orange-500) */
+  --primary: #f97316;
+  --primary-foreground: #ffffff;
+
+  /* Secondary — Light gray surface */
+  --secondary: #f3f4f6;                     /* gray-100 */
+  --secondary-foreground: #1f2937;          /* gray-800 */
+
+  /* Muted — Subtle backgrounds */
+  --muted: #f9fafb;                         /* gray-50 */
+  --muted-foreground: #4b5563;              /* gray-600 */
+
+  /* Accent — Hover/active tint */
+  --accent: #fff7ed;                        /* orange-50 */
+  --accent-foreground: #c2410c;             /* orange-700 */
+
+  /* Destructive */
+  --destructive: #dc2626;                   /* red-600 */
+
+  /* Borders & Inputs */
+  --border: #e5e7eb;                        /* gray-200 */
+  --input: #e5e7eb;
+  --ring: #f97316;                          /* Orange — focus ring */
+
+  /* Charts */
+  --chart-1: #f97316;                       /* Orange */
+  --chart-2: #22c55e;                       /* Green */
+  --chart-3: #3b82f6;                       /* Blue */
+  --chart-4: #a855f7;                       /* Purple */
+  --chart-5: #ef4444;                       /* Red */
 }
 
 .dark {
-  /* Navy dark theme — base: #101C2C */
-  --background: #101c2c;
-  --foreground: oklch(92% 0.005 220); /* Slightly cool off-white */
-  --card: #162336; /* +2 stops lighter navy */
-  --card-foreground: oklch(92% 0.005 220);
-  --popover: #1a2a3e; /* Dropdown — elevated */
-  --popover-foreground: oklch(92% 0.005 220);
-  --primary: oklch(65% 0.18 195); /* Teal — pops on navy */
-  --primary-foreground: oklch(100% 0 0);
-  --secondary: #1a2a3e;
-  --secondary-foreground: oklch(80% 0.005 220);
-  --muted: #0d1824; /* Darker than bg — subtle areas */
-  --muted-foreground: oklch(58% 0.01 220); /* Readable secondary text */
-  --accent: #1e3048; /* Hover/active state */
-  --accent-foreground: oklch(92% 0.005 220);
-  --destructive: oklch(60% 0.22 25);
-  --border: #1a3455; /* Visible navy border */
-  --input: #152d4d; /* Input border — visible on dark bg */
-  --ring: oklch(65% 0.18 195);
-  --chart-1: oklch(62% 0.18 195);
-  --chart-2: oklch(58% 0.16 160);
-  --chart-3: oklch(65% 0.15 280);
-  --chart-4: oklch(68% 0.17 45);
-  --chart-5: oklch(62% 0.18 320);
-  --sidebar: #0d1824; /* Sidebar — darker than bg */
-  --sidebar-foreground: oklch(85% 0.005 220);
-  --sidebar-primary: oklch(65% 0.18 195);
-  --sidebar-primary-foreground: oklch(100% 0 0);
-  --sidebar-accent: #162336;
-  --sidebar-accent-foreground: oklch(92% 0.005 220);
-  --sidebar-border: #1e3048;
-  --sidebar-ring: oklch(65% 0.18 195);
+  /* ── Apple Gadgets BD Theme — Dark Mode (Black base like header/footer) ── */
+  --background: #0a0a0a;                    /* Near-black page bg */
+  --foreground: #f9fafb;                    /* gray-50 — bright text */
+
+  /* Cards */
+  --card: #111111;                          /* Slightly lifted black */
+  --card-foreground: #f9fafb;
+  --popover: #1a1a1a;                       /* Elevated dropdown */
+  --popover-foreground: #f9fafb;
+
+  /* Primary — Orange stays consistent */
+  --primary: #f97316;
+  --primary-foreground: #ffffff;
+
+  /* Secondary — Dark gray surface */
+  --secondary: #1f2937;                     /* gray-800 */
+  --secondary-foreground: #f3f4f6;          /* gray-100 */
+
+  /* Muted */
+  --muted: #111827;                         /* gray-900 */
+  --muted-foreground: #9ca3af;              /* gray-400 */
+
+  /* Accent — Orange-tinted hover */
+  --accent: #1c1008;                        /* Very dark orange tint */
+  --accent-foreground: #fb923c;             /* orange-400 */
+
+  /* Destructive */
+  --destructive: #ef4444;                   /* red-500 */
+
+  /* Borders & Inputs */
+  --border: #374151;                        /* gray-700 */
+  --input: #374151;
+  --ring: #f97316;                          /* Orange — focus ring */
+
+  /* Charts */
+  --chart-1: #f97316;                       /* Orange */
+  --chart-2: #22c55e;                       /* Green */
+  --chart-3: #60a5fa;                       /* Blue-400 */
+  --chart-4: #c084fc;                       /* Purple-400 */
+  --chart-5: #f87171;                       /* Red-400 */
+
+  /* Sidebar — Pure black like site's header/footer */
+  --sidebar: #000000;
+  --sidebar-foreground: #f3f4f6;
+  --sidebar-primary: #f97316;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #1a1a1a;
+  --sidebar-accent-foreground: #f9fafb;
+  --sidebar-border: #374151;
+  --sidebar-ring: #f97316;
 }
 
 @layer base {
@@ -112,10 +149,7 @@
   }
 
   body {
-    @apply bg-background text-foreground;
-    font-family:
-      var(--font-geist-sans), var(--font-bangla), ui-sans-serif, system-ui,
-      sans-serif;
+    @apply bg-background text-foreground font-sans;
     font-feature-settings:
       "rlig" 1,
       "calt" 1;
@@ -130,22 +164,22 @@
     scroll-behavior: smooth;
   }
 
-  /* Custom scrollbar */
+  /* Custom scrollbar - Modern & Slim */
   ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+    width: 6px;
+    height: 6px;
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-muted;
+    @apply bg-transparent;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-primary/30 rounded-lg;
+    @apply bg-primary/40 rounded-full;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-primary/50;
+    @apply bg-primary/70;
   }
 
   /* ─── Form Elements - Professional Spacing ─── */
@@ -270,12 +304,16 @@
   }
 
   /* Container max width */
+  .container {
+    @apply max-w-[1536px] w-full mx-auto px-4 sm:px-6 md:px-8;
+  }
+
   .container-narrow {
-    @apply max-w-4xl mx-auto px-4;
+    @apply max-w-[1024px] mx-auto px-4;
   }
 
   .container-wide {
-    @apply max-w-7xl mx-auto px-4;
+    @apply max-w-[1600px] mx-auto px-4 md:px-6 lg:px-8;
   }
 
   /* ─── Form Groups ─── */
@@ -297,9 +335,9 @@
 
   /* ─── Visual Effects ─── */
 
-  /* Gradient text */
+  /* Gradient text — Orange brand palette */
   .gradient-text {
-    @apply bg-gradient-to-r from-cyan-500 via-teal-500 to-emerald-500;
+    @apply bg-gradient-to-r from-orange-500 via-amber-500 to-orange-400;
     @apply bg-clip-text text-transparent;
   }
 

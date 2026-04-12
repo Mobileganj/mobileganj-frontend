@@ -100,7 +100,7 @@ export default function EMIPage() {
         <div className="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-primary/5 blur-3xl" />
         <div className="absolute -bottom-24 -left-24 h-80 w-80 rounded-full bg-violet-500/5 blur-3xl" />
 
-        <div className="container mx-auto px-4 relative">
+        <div className="max-w-7xl mx-auto px-4 relative">
           <div className="max-w-3xl mx-auto text-center">
             <motion.div {...fadeUp} transition={{ duration: 0.5 }}>
               <Badge className="mb-4 bg-primary/10 text-primary border-primary/20 hover:bg-primary/10 px-4 py-1.5">
@@ -181,7 +181,7 @@ export default function EMIPage() {
 
       {/* ── Features Grid ── */}
       <section className="py-16 md:py-20">
-        <div className="container mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-3">কেন আমাদের EMI সেরা?</h2>
             <p className="text-muted-foreground max-w-lg mx-auto">
@@ -214,7 +214,7 @@ export default function EMIPage() {
 
       {/* ── EMI Calculator ── */}
       <section id="calculator" className="py-16 md:py-20 bg-muted/30">
-        <div className="container mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
             <Badge
               variant="outline"
@@ -289,11 +289,10 @@ export default function EMIPage() {
                       <button
                         key={d}
                         onClick={() => setDuration(d)}
-                        className={`py-3 rounded-xl text-sm font-semibold border-2 transition-all duration-200 ${
-                          duration === d
-                            ? "border-primary bg-primary/10 text-primary"
-                            : "border-border hover:border-primary/40 text-muted-foreground"
-                        }`}
+                        className={`py-3 rounded-xl text-sm font-semibold border-2 transition-all duration-200 ${duration === d
+                          ? "border-primary bg-primary/10 text-primary"
+                          : "border-border hover:border-primary/40 text-muted-foreground"
+                          }`}
                       >
                         {d} মাস
                       </button>
@@ -393,7 +392,7 @@ export default function EMIPage() {
 
       {/* ── EMI Table ── */}
       <section className="py-16 md:py-20">
-        <div className="container mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-3">কিস্তির হিসাব</h2>
             <p className="text-muted-foreground">
@@ -434,9 +433,8 @@ export default function EMIPage() {
                       return (
                         <tr
                           key={p}
-                          className={`border-t border-border/40 transition-colors hover:bg-muted/30 ${
-                            idx % 2 === 0 ? "" : "bg-muted/10"
-                          }`}
+                          className={`border-t border-border/40 transition-colors hover:bg-muted/30 ${idx % 2 === 0 ? "" : "bg-muted/10"
+                            }`}
                         >
                           <td className="py-4 px-6 font-semibold">
                             ৳{p.toLocaleString()}
@@ -474,7 +472,7 @@ export default function EMIPage() {
 
       {/* ── How it Works ── */}
       <section className="py-16 md:py-20 bg-muted/30">
-        <div className="container mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-3">কিভাবে EMI নিবেন?</h2>
             <p className="text-muted-foreground">মাত্র ৪টি সহজ ধাপে</p>
@@ -507,7 +505,7 @@ export default function EMIPage() {
 
       {/* ── Supported Banks ── */}
       <section className="py-16 md:py-20">
-        <div className="container mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-2 mb-3">
               <Building2 className="h-5 w-5 text-primary" />
@@ -542,7 +540,7 @@ export default function EMIPage() {
 
       {/* ── FAQ / Important Info ── */}
       <section className="py-16 md:py-20 bg-muted/30">
-        <div className="container mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-10">জরুরি তথ্য</h2>
 
@@ -583,7 +581,7 @@ export default function EMIPage() {
 
       {/* ── CTA Section ── */}
       <section className="py-20 md:py-28">
-        <div className="container mx-auto px-4 text-center">
+        <div className="max-w-7xl mx-auto px-4 text-center">
           <motion.div {...fadeUp} transition={{ duration: 0.5 }}>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               আজই EMI তে আপনার স্বপ্নের ফোন নিন!

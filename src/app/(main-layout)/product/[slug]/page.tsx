@@ -96,11 +96,10 @@ export default function ProductDetailsPage({
     Array.from({ length: 5 }, (_, i) => (
       <Star
         key={i}
-        className={`h-4 w-4 ${
-          i < Math.floor(rating)
-            ? "fill-amber-400 text-amber-400"
-            : "fill-muted text-muted-foreground/30"
-        }`}
+        className={`h-4 w-4 ${i < Math.floor(rating)
+          ? "fill-amber-400 text-amber-400"
+          : "fill-muted text-muted-foreground/30"
+          }`}
       />
     ));
 
@@ -108,7 +107,7 @@ export default function ProductDetailsPage({
     <div className="min-h-screen">
       {/* ── Breadcrumb ── */}
       <div className="bg-muted/30 border-b border-border/40">
-        <div className="container mx-auto px-4 py-3">
+        <div className="max-w-7xl mx-auto px-4 py-3">
           <nav className="flex items-center gap-1.5 text-sm text-muted-foreground">
             <Link href="/" className="hover:text-primary transition-colors">
               হোম
@@ -133,7 +132,7 @@ export default function ProductDetailsPage({
       </div>
 
       {/* ── Main Product Section ── */}
-      <section className="container mx-auto px-4 py-8 md:py-12">
+      <section className="max-w-7xl mx-auto px-4 py-8 md:py-12">
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-12">
           {/* ── Left: Gallery (5 cols) ── */}
           <motion.div
@@ -160,15 +159,14 @@ export default function ProductDetailsPage({
               {product.tags?.map((tag) => (
                 <Badge
                   key={tag}
-                  className={`text-[11px] font-medium ${
-                    tag === "Hot"
-                      ? "bg-orange-500 hover:bg-orange-500 text-white"
-                      : tag === "Best Deal"
-                        ? "bg-emerald-500 hover:bg-emerald-500 text-white"
-                        : tag === "New Arrival"
-                          ? "bg-blue-500 hover:bg-blue-500 text-white"
-                          : "bg-red-500 hover:bg-red-500 text-white"
-                  }`}
+                  className={`text-[11px] font-medium ${tag === "Hot"
+                    ? "bg-orange-500 hover:bg-orange-500 text-white"
+                    : tag === "Best Deal"
+                      ? "bg-emerald-500 hover:bg-emerald-500 text-white"
+                      : tag === "New Arrival"
+                        ? "bg-blue-500 hover:bg-blue-500 text-white"
+                        : "bg-red-500 hover:bg-red-500 text-white"
+                    }`}
                 >
                   {tag === "Hot" && (
                     <Zap className="h-3 w-3 mr-0.5 fill-current" />
@@ -253,13 +251,12 @@ export default function ProductDetailsPage({
               <span className="text-sm text-muted-foreground">কন্ডিশন:</span>
               <Badge
                 variant="outline"
-                className={`${
-                  product.condition === "Brand New"
-                    ? "border-emerald-300 text-emerald-700 bg-emerald-50 dark:bg-emerald-950 dark:text-emerald-400 dark:border-emerald-800"
-                    : product.condition === "Like New"
-                      ? "border-teal-300 text-teal-700 bg-teal-50 dark:bg-teal-950 dark:text-teal-400 dark:border-teal-800"
-                      : "border-amber-300 text-amber-700 bg-amber-50 dark:bg-amber-950 dark:text-amber-400 dark:border-amber-800"
-                }`}
+                className={`${product.condition === "Brand New"
+                  ? "border-emerald-300 text-emerald-700 bg-emerald-50 dark:bg-emerald-950 dark:text-emerald-400 dark:border-emerald-800"
+                  : product.condition === "Like New"
+                    ? "border-teal-300 text-teal-700 bg-teal-50 dark:bg-teal-950 dark:text-teal-400 dark:border-teal-800"
+                    : "border-amber-300 text-amber-700 bg-amber-50 dark:bg-amber-950 dark:text-amber-400 dark:border-amber-800"
+                  }`}
               >
                 {product.condition === "Brand New"
                   ? "ব্র্যান্ড নিউ"
@@ -340,11 +337,10 @@ export default function ProductDetailsPage({
                 <Button
                   size="lg"
                   variant="outline"
-                  className={`h-12 w-12 shrink-0 ${
-                    isWishlisted
-                      ? "text-red-500 border-red-200 hover:bg-red-50 dark:border-red-800 dark:hover:bg-red-950"
-                      : ""
-                  }`}
+                  className={`h-12 w-12 shrink-0 ${isWishlisted
+                    ? "text-red-500 border-red-200 hover:bg-red-50 dark:border-red-800 dark:hover:bg-red-950"
+                    : ""
+                    }`}
                   onClick={handleWishlist}
                 >
                   <Heart
@@ -520,7 +516,7 @@ export default function ProductDetailsPage({
 
       {/* ── Tabs Section ── */}
       <section className="border-t border-border/40 bg-muted/20">
-        <div className="container mx-auto px-4 py-8 md:py-12">
+        <div className="max-w-7xl mx-auto px-4 py-8 md:py-12">
           <Tabs defaultValue="description">
             <TabsList className="w-full justify-start bg-transparent border-b border-border/40 rounded-none p-0 h-auto gap-0 overflow-x-auto flex-nowrap">
               {[
@@ -679,7 +675,7 @@ export default function ProductDetailsPage({
 
       {/* ── Related Products ── */}
       {relatedProducts.length > 0 && (
-        <section className="container mx-auto px-4 py-12 md:py-16">
+        <section className="max-w-7xl mx-auto px-4 py-12 md:py-16">
           <div className="flex items-center justify-between mb-8">
             <div>
               <h2 className="text-2xl font-bold">সম্পর্কিত প্রোডাক্ট</h2>

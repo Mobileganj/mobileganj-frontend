@@ -1,14 +1,15 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ArrowLeft, Save, Printer, Package, ShoppingCart, CreditCard, X } from 'lucide-react';
+import { useParams } from 'next/navigation';
+import { ArrowLeft, Save, Printer, Package, CreditCard, X } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import CustomerSearch from '../_components/CustomerSearch';
-import ProductList from '../_components/ProductList';
-import ProductCart from '../_components/ProductCart';
-import PaymentSummary from '../_components/PaymentSummary';
-import WarrantySettings from '../_components/WarrantySettings';
+import CustomerSearch from '../../_components/CustomerSearch';
+import ProductList from '../../_components/ProductList';
+import ProductCart from '../../_components/ProductCart';
+import PaymentSummary from '../../_components/PaymentSummary';
+import WarrantySettings from '../../_components/WarrantySettings';
 
 // Inline compact date-time field for sale
 function getNow() {
@@ -28,10 +29,31 @@ interface CartItem {
   batteryHealth?: number;
 }
 
-export default function NewSalePage() {
+export default function EditSalePage() {
+  const params = useParams();
+  const invoiceId = params.id as string;
+
   const [cart, setCart] = useState<CartItem[]>([]);
   const [activeDrawer, setActiveDrawer] = useState<'products' | 'cart' | 'payment' | null>(null);
   const [saleDateTime, setSaleDateTime] = useState('');
+
+  // Simulate fetching data on mount
+  useEffect(() => { 
+    // In a real app, you would fetch invoice details by `invoiceId`
+    setSaleDateTime('2024-01-29T10:30');
+    setCart([
+      {
+        id: '1',
+        name: 'iPhone 15 Pro Max',
+        imei: '123456789012345',
+        qty: 1,
+        price: 145000,
+        stock: 5,
+        warrantyId: '1',
+        batteryHealth: 100
+      }
+    ]);
+  }, [invoiceId]);
 
   const addToCart = (product: { id: string; name: string; price: number; stock: number; imei?: string }) => {
     const existing = cart.find(item => item.id === product.id);
@@ -77,20 +99,15 @@ export default function NewSalePage() {
 
   const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
 
-  const handleSave = () => {
-    const invoiceNo = `INV-${Date.now().toString().slice(-6)}`;
-    console.log('Saving sale...', { cart, subtotal, invoiceNo, saleDateTime });
-    window.location.href = `/admin/sales/invoice/${invoiceNo}`;
+  const handleUpdate = () => {
+    console.log('Updating sale...', { invoiceId, cart, subtotal, saleDateTime });
+    window.location.href = `/admin/sales/invoice/${invoiceId}`;
   };
 
-  const handleSaveAndPrint = () => {
-    const invoiceNo = `INV-${Date.now().toString().slice(-6)}`;
-    console.log('Saving and printing...', { cart, subtotal, invoiceNo, saleDateTime });
-    window.location.href = `/admin/sales/invoice/${invoiceNo}`;
+  const handleUpdateAndPrint = () => {
+    console.log('Updating and printing...', { invoiceId, cart, subtotal, saleDateTime });
+    window.location.href = `/admin/sales/invoice/${invoiceId}`;
   };
-
-  // Set current datetime on mount
-  useEffect(() => { setSaleDateTime(getNow()); }, []);
 
   return (
     <div className="space-y-4 sm:space-y-6 px-2 sm:px-0">
@@ -103,13 +120,13 @@ export default function NewSalePage() {
             </Button>
           </Link>
           <div>
-            <h1 className="text-2xl sm:text-3xl font-bold">New Sale</h1>
-            <p className="text-muted-foreground text-sm sm:text-base">Create new invoice</p>
+            <h1 className="text-2xl sm:text-3xl font-bold">Edit Sale</h1>
+            <p className="text-muted-foreground text-sm sm:text-base">Update existing invoice</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
           <span className="text-xs sm:text-sm text-muted-foreground">Invoice No:</span>
-          <span className="font-mono font-bold text-sm sm:text-base">INV-{Date.now().toString().slice(-6)}</span>
+          <span className="font-mono font-bold text-sm sm:text-base">{invoiceId}</span>
         </div>
       </div>
 
@@ -203,13 +220,13 @@ export default function NewSalePage() {
         <div className="overflow-y-auto h-[calc(100%-64px)] p-4 space-y-4">
           <PaymentSummary subtotal={subtotal} />
           <div className="space-y-3">
-            <Button className="w-full" size="lg" onClick={handleSave}>
+            <Button className="w-full" size="lg" onClick={handleUpdate}>
               <Save className="w-4 h-4 mr-2" />
-              Save Sale
+              Update Sale
             </Button>
-            <Button variant="outline" className="w-full" size="lg" onClick={handleSaveAndPrint}>
+            <Button variant="outline" className="w-full" size="lg" onClick={handleUpdateAndPrint}>
               <Printer className="w-4 h-4 mr-2" />
-              Save & Print
+              Update & Print
             </Button>
           </div>
         </div>
@@ -240,13 +257,13 @@ export default function NewSalePage() {
 
           {/* Actions */}
           <div className="space-y-3">
-            <Button className="w-full" size="lg" onClick={handleSave}>
+            <Button className="w-full" size="lg" onClick={handleUpdate}>
               <Save className="w-4 h-4 mr-2" />
-              Save Sale
+              Update Sale
             </Button>
-            <Button variant="outline" className="w-full" size="lg" onClick={handleSaveAndPrint}>
+            <Button variant="outline" className="w-full" size="lg" onClick={handleUpdateAndPrint}>
               <Printer className="w-4 h-4 mr-2" />
-              Save & Print
+              Update & Print
             </Button>
             <Link href="/admin/sales" className="block">
               <Button variant="ghost" className="w-full">
