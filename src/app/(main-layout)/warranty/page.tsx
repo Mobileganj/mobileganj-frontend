@@ -152,7 +152,7 @@ export default function WarrantyPage() {
             </motion.div>
           </div>
 
-          <div className="container mx-auto px-4 py-12 sm:py-16 lg:py-20 relative text-white">
+          <div className="max-w-7xl mx-auto px-4 py-12 sm:py-16 lg:py-20 relative text-white">
             {/* Breadcrumb */}
             <motion.nav
               initial={{ opacity: 0, y: -10 }}
@@ -241,7 +241,7 @@ export default function WarrantyPage() {
 
       {/* ─── Stats Strip ─── */}
       <section className="border-b border-border/40 bg-muted/20">
-        <div className="container mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -272,9 +272,8 @@ export default function WarrantyPage() {
               <motion.div
                 key={stat.label}
                 variants={scaleIn}
-                className={`flex flex-col items-center justify-center py-8 sm:py-10 ${
-                  i < 2 ? "border-r border-border/40" : ""
-                }`}
+                className={`flex flex-col items-center justify-center py-8 sm:py-10 ${i < 2 ? "border-r border-border/40" : ""
+                  }`}
               >
                 <stat.icon className={`h-5 w-5 ${stat.color} mb-2`} />
                 <p className="text-2xl sm:text-3xl font-bold">{stat.value}</p>
@@ -287,7 +286,7 @@ export default function WarrantyPage() {
         </div>
       </section>
 
-      <div className="container mx-auto px-4">
+      <div className="max-w-7xl mx-auto px-4">
         {/* ─── What's Covered ─── */}
         <section className="py-12 sm:py-16">
           <motion.div
@@ -453,7 +452,7 @@ export default function WarrantyPage() {
 
       {/* ─── Bottom CTA ─── */}
       <section className="bg-gradient-to-br from-sky-600/5 via-blue-600/10 to-indigo-600/5 border-t border-border/40">
-        <div className="container mx-auto px-4 py-12 sm:py-16">
+        <div className="max-w-7xl mx-auto px-4 py-12 sm:py-16">
           <motion.div
             initial="hidden"
             whileInView="visible"

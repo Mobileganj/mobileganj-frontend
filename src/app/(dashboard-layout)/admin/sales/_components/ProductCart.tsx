@@ -4,6 +4,14 @@ import { useState } from 'react';
 import { Plus, Minus, X, Search } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+
+const mockWarranties = [
+  { id: '1', name: '1 Year Official Warranty', months: 12 },
+  { id: '2', name: '6 Months Warranty', months: 6 },
+  { id: '3', name: '3 Months Warranty', months: 3 },
+  { id: '4', name: 'No Warranty', months: 0 },
+];
 
 interface CartItem {
   id: string;
@@ -12,18 +20,21 @@ interface CartItem {
   qty: number;
   price: number;
   stock: number;
+  warrantyId?: string;
+  batteryHealth?: number;
 }
 
 interface ProductCartProps {
   cart: CartItem[];
   onUpdateQty: (id: string, delta: number) => void;
   onRemoveItem: (id: string) => void;
+  onUpdateWarranty?: (id: string, warrantyId: string) => void;
+  onUpdateBatteryHealth?: (id: string, batteryHealth: number) => void;
 }
 
-export default function ProductCart({ cart, onUpdateQty, onRemoveItem }: ProductCartProps) {
-  const [search, setSearch] = useState('');
-
+export default function ProductCart({ cart, onUpdateQty, onRemoveItem, onUpdateWarranty, onUpdateBatteryHealth }: ProductCartProps) {
   const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
 
   return (
     <div className="bg-card border rounded-lg p-3 sm:p-6 space-y-3 sm:space-y-4">
@@ -31,17 +42,7 @@ export default function ProductCart({ cart, onUpdateQty, onRemoveItem }: Product
         <h3 className="font-semibold text-base sm:text-lg">Cart Items</h3>
         <span className="text-xs sm:text-sm text-muted-foreground">{cart.length} items</span>
       </div>
-      
-      {/* Quick Search */}
-      <div className="relative">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-        <Input 
-          placeholder="Quick search by IMEI or barcode..." 
-          className="pl-10 h-10 sm:h-12 text-sm"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-      </div>
+
 
       {/* Cart Items */}
       {cart.length > 0 ? (
@@ -54,15 +55,48 @@ export default function ProductCart({ cart, onUpdateQty, onRemoveItem }: Product
                 {item.imei && (
                   <p className="text-xs text-muted-foreground">IMEI: {item.imei}</p>
                 )}
+                <div className="mt-2 w-full max-w-[450px] flex items-center gap-2">
+                  <Select
+                    value={item.warrantyId}
+                    onValueChange={(val) => onUpdateWarranty && onUpdateWarranty(item.id, val)}
+                  >
+                    <SelectTrigger className="h-7 text-xs sm:h-8 flex-1">
+                      <SelectValue placeholder="Select warranty" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {mockWarranties.map(w => (
+                        <SelectItem key={w.id} value={w.id} className="text-xs">
+                          {w.name} ({w.months} m)
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  
+                  {/* Conditional Battery Health Input */}
+                  {(item.name.toLowerCase().includes('iphone') || item.name.toLowerCase().includes('apple')) && (
+                    <div className="flex items-center gap-1.5 shrink-0">
+                      <span className="text-xs text-muted-foreground whitespace-nowrap">BH %:</span>
+                      <Input 
+                        type="number" 
+                        min="1" 
+                        max="100" 
+                        placeholder="100"
+                        className="h-7 text-xs sm:h-8 w-16 text-center px-1"
+                        value={item.batteryHealth || ''}
+                        onChange={(e) => onUpdateBatteryHealth && onUpdateBatteryHealth(item.id, parseInt(e.target.value) || 0)}
+                      />
+                    </div>
+                  )}
+                </div>
               </div>
-              
+
               {/* Quantity Controls & Price - Mobile: Row, Desktop: Separate */}
               <div className="flex items-center justify-between sm:justify-end gap-3">
                 {/* Quantity Controls */}
                 <div className="flex items-center gap-2">
-                  <Button 
-                    variant="outline" 
-                    size="icon" 
+                  <Button
+                    variant="outline"
+                    size="icon"
                     className="h-7 w-7 sm:h-8 sm:w-8"
                     onClick={() => onUpdateQty(item.id, -1)}
                     disabled={item.qty === 1}
@@ -70,9 +104,9 @@ export default function ProductCart({ cart, onUpdateQty, onRemoveItem }: Product
                     <Minus className="w-3 h-3" />
                   </Button>
                   <span className="w-6 sm:w-8 text-center font-medium text-sm">{item.qty}</span>
-                  <Button 
-                    variant="outline" 
-                    size="icon" 
+                  <Button
+                    variant="outline"
+                    size="icon"
                     className="h-7 w-7 sm:h-8 sm:w-8"
                     onClick={() => onUpdateQty(item.id, 1)}
                     disabled={item.qty >= item.stock}
@@ -80,17 +114,17 @@ export default function ProductCart({ cart, onUpdateQty, onRemoveItem }: Product
                     <Plus className="w-3 h-3" />
                   </Button>
                 </div>
-                
+
                 {/* Price */}
                 <div className="text-right min-w-[90px] sm:min-w-[100px]">
                   <p className="font-semibold text-sm sm:text-base">৳{(item.price * item.qty).toLocaleString()}</p>
                   <p className="text-xs text-muted-foreground">৳{item.price.toLocaleString()} each</p>
                 </div>
-                
+
                 {/* Remove Button */}
-                <Button 
-                  variant="ghost" 
-                  size="icon" 
+                <Button
+                  variant="ghost"
+                  size="icon"
                   className="text-destructive h-7 w-7 sm:h-8 sm:w-8"
                   onClick={() => onRemoveItem(item.id)}
                 >

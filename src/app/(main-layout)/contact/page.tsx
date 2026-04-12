@@ -158,7 +158,7 @@ export default function ContactPage() {
         <div className="absolute top-20 right-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
         <div className="absolute bottom-10 left-10 w-60 h-60 bg-primary/5 rounded-full blur-3xl" />
 
-        <div className="container mx-auto px-4 py-12 sm:py-16 relative">
+        <div className="max-w-7xl mx-auto px-4 py-12 sm:py-16 relative">
           {/* Breadcrumb */}
           <motion.nav
             initial={{ opacity: 0, y: -10 }}
@@ -223,7 +223,7 @@ export default function ContactPage() {
 
       {/* ─── Contact Methods ─── */}
       <section className="border-b border-border/40">
-        <div className="container mx-auto px-4 py-10 sm:py-12">
+        <div className="max-w-7xl mx-auto px-4 py-10 sm:py-12">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -272,7 +272,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <div className="container mx-auto px-4">
+      <div className="max-w-7xl mx-auto px-4">
         {/* ─── Form + Store Info ─── */}
         <section className="py-12 sm:py-16">
           <div className="grid lg:grid-cols-12 gap-8">
@@ -668,7 +668,7 @@ export default function ContactPage() {
 
       {/* ─── Bottom CTA ─── */}
       <section className="bg-gradient-to-br from-primary/5 via-primary/10 to-primary/5 border-t border-border/40">
-        <div className="container mx-auto px-4 py-12 sm:py-16">
+        <div className="max-w-7xl mx-auto px-4 py-12 sm:py-16">
           <motion.div
             initial="hidden"
             whileInView="visible"

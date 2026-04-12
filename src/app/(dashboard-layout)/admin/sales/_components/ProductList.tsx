@@ -81,7 +81,11 @@ export default function ProductList({ onAddToCart }: ProductListProps) {
   const [selectedCategory, setSelectedCategory] = useState("all");
 
   const filteredProducts = mockProducts.filter((p) => {
-    const matchesSearch = p.name.toLowerCase().includes(search.toLowerCase());
+    const searchLower = search.toLowerCase();
+    const matchesSearch = 
+      p.name.toLowerCase().includes(searchLower) || 
+      (p.imei && p.imei.toLowerCase().includes(searchLower));
+      
     const matchesCategory =
       selectedCategory === "all" || p.category === selectedCategory;
     return matchesSearch && matchesCategory;
@@ -100,7 +104,7 @@ export default function ProductList({ onAddToCart }: ProductListProps) {
       <div className="relative">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
         <Input
-          placeholder="Search..."
+          placeholder="Search by name, IMEI or barcode..."
           className="pl-10"
           value={search}
           onChange={(e) => setSearch(e.target.value)}

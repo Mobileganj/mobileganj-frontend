@@ -180,30 +180,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
               )}
             </div>
 
-            {/* Add to Cart / Shop Now Button */}
-            <div className="pt-2 flex items-center gap-2">
-              <Button
-                className={`flex-1 rounded-lg text-sm font-semibold ${
-                  isOutOfStock
-                    ? "bg-muted text-muted-foreground cursor-not-allowed"
-                    : product.isPreOrder
-                      ? "bg-violet-600 hover:bg-violet-700 text-white"
-                      : ""
-                }`}
-                size="sm"
-                disabled={isOutOfStock}
-                onClick={handleAddToCart}
-              >
-                {isOutOfStock ? "Out of Stock" : product.isPreOrder ? "Pre-Order" : "Shop Now"}
-              </Button>
-              <button
-                onClick={handleAddToCart}
-                disabled={isOutOfStock}
-                className="h-8 w-8 shrink-0 rounded-lg border border-border/60 flex items-center justify-center hover:bg-accent transition-colors disabled:opacity-40"
-              >
-                <ShoppingCart className="h-3.5 w-3.5" />
-              </button>
-            </div>
+
           </div>
         </div>
       </Link>

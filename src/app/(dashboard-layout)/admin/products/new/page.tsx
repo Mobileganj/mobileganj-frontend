@@ -27,20 +27,20 @@ export default function NewProductPage() {
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <Link href="/admin/products">
-            <Button variant="ghost" size="icon">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="flex items-start md:items-center gap-2 md:gap-4">
+          <Link href="/admin/products" className="mt-1 md:mt-0">
+            <Button variant="ghost" size="icon" className="shrink-0">
               <ArrowLeft className="w-5 h-5" />
             </Button>
           </Link>
           <div>
-            <h1 className="text-3xl font-bold">Add New Product</h1>
-            <p className="text-muted-foreground">Stock in new product to inventory</p>
+            <h1 className="text-2xl md:text-3xl font-bold">Add New Product</h1>
+            <p className="text-sm md:text-base text-muted-foreground">Stock in new product to inventory</p>
           </div>
         </div>
         {category && (
-          <Button variant="outline" onClick={handleReset}>
+          <Button variant="outline" onClick={handleReset} className="w-full md:w-auto">
             Reset Selection
           </Button>
         )}

@@ -1,6 +1,6 @@
 'use client';
 
-import { Bell, ChevronDown, User, Menu, LogOut, Settings, LayoutDashboard, Plus, ShoppingCart, Package, Users as UsersIcon, DollarSign } from 'lucide-react';
+import { Bell, ChevronDown, User, Menu, LogOut, Settings, LayoutDashboard, Plus, ShoppingCart, Package, CreditCard, DollarSign } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ThemeToggle from '@/components/shared/ThemeToggle';
 import {
@@ -43,9 +43,9 @@ export default function DashboardHeader({ onMenuClick }: DashboardHeaderProps) {
             </a>
           </Button>
           <Button asChild variant="outline" size="sm" className="hidden lg:flex">
-            <a href="/admin/customers/new" className="gap-2">
-              <UsersIcon className="w-4 h-4" />
-              Add Customer
+            <a href="/admin/customers/due-collection" className="gap-2">
+              <CreditCard className="w-4 h-4" />
+              Due Paid
             </a>
           </Button>
           <Button asChild variant="outline" size="sm" className="hidden xl:flex">

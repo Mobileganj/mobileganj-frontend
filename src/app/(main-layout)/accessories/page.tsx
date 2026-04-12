@@ -182,7 +182,7 @@ export default function AccessoriesPage() {
             </motion.div>
           </div>
 
-          <div className="container mx-auto px-4 py-12 sm:py-16 lg:py-20 relative text-white">
+          <div className="max-w-7xl mx-auto px-4 py-12 sm:py-16 lg:py-20 relative text-white">
             {/* Breadcrumb */}
             <motion.nav
               initial={{ opacity: 0, y: -10 }}
@@ -311,9 +311,8 @@ export default function AccessoriesPage() {
               <motion.div
                 key={stat.label}
                 variants={scaleIn}
-                className={`flex flex-col items-center justify-center py-8 sm:py-10 ${
-                  i < 3 ? "border-r border-border/40" : ""
-                }`}
+                className={`flex flex-col items-center justify-center py-8 sm:py-10 ${i < 3 ? "border-r border-border/40" : ""
+                  }`}
               >
                 <stat.icon className={`h-5 w-5 ${stat.color} mb-2`} />
                 <p className="text-2xl sm:text-3xl font-bold">{stat.value}</p>
@@ -328,7 +327,7 @@ export default function AccessoriesPage() {
 
       {/* ─── Category Cards ─── */}
       <section className="bg-muted/10 border-b border-border/40">
-        <div className="container mx-auto px-4 py-8 sm:py-10">
+        <div className="max-w-7xl mx-auto px-4 py-8 sm:py-10">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -354,32 +353,28 @@ export default function AccessoriesPage() {
             <motion.div variants={scaleIn}>
               <button
                 onClick={() => setSelectedCategory("all")}
-                className={`w-full rounded-2xl border p-4 text-center transition-all duration-300 group hover:shadow-md ${
-                  selectedCategory === "all"
-                    ? "bg-primary text-primary-foreground border-primary shadow-md"
-                    : "bg-background border-border/60 hover:border-primary/30"
-                }`}
+                className={`w-full rounded-2xl border p-4 text-center transition-all duration-300 group hover:shadow-md ${selectedCategory === "all"
+                  ? "bg-primary text-primary-foreground border-primary shadow-md"
+                  : "bg-background border-border/60 hover:border-primary/30"
+                  }`}
               >
                 <div
-                  className={`w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-2 transition-transform duration-300 group-hover:scale-110 ${
-                    selectedCategory === "all" ? "bg-white/20" : "bg-muted"
-                  }`}
+                  className={`w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-2 transition-transform duration-300 group-hover:scale-110 ${selectedCategory === "all" ? "bg-white/20" : "bg-muted"
+                    }`}
                 >
                   <Grid3X3
-                    className={`h-5 w-5 ${
-                      selectedCategory === "all"
-                        ? "text-primary-foreground"
-                        : "text-muted-foreground"
-                    }`}
+                    className={`h-5 w-5 ${selectedCategory === "all"
+                      ? "text-primary-foreground"
+                      : "text-muted-foreground"
+                      }`}
                   />
                 </div>
                 <p className="text-sm font-semibold">সকল</p>
                 <p
-                  className={`text-xs mt-0.5 ${
-                    selectedCategory === "all"
-                      ? "text-primary-foreground/70"
-                      : "text-muted-foreground"
-                  }`}
+                  className={`text-xs mt-0.5 ${selectedCategory === "all"
+                    ? "text-primary-foreground/70"
+                    : "text-muted-foreground"
+                    }`}
                 >
                   {accessoryProducts.length.toLocaleString("bn-BD")}টি পণ্য
                 </p>
@@ -396,30 +391,26 @@ export default function AccessoriesPage() {
                 <motion.div key={cat.name} variants={scaleIn}>
                   <button
                     onClick={() => setSelectedCategory(cat.name)}
-                    className={`w-full rounded-2xl border p-4 text-center transition-all duration-300 group hover:shadow-md ${
-                      isActive
-                        ? "bg-primary text-primary-foreground border-primary shadow-md"
-                        : "bg-background border-border/60 hover:border-primary/30"
-                    }`}
+                    className={`w-full rounded-2xl border p-4 text-center transition-all duration-300 group hover:shadow-md ${isActive
+                      ? "bg-primary text-primary-foreground border-primary shadow-md"
+                      : "bg-background border-border/60 hover:border-primary/30"
+                      }`}
                   >
                     <div
-                      className={`w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-2 transition-transform duration-300 group-hover:scale-110 ${
-                        isActive ? "bg-white/20" : config.bg
-                      }`}
+                      className={`w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-2 transition-transform duration-300 group-hover:scale-110 ${isActive ? "bg-white/20" : config.bg
+                        }`}
                     >
                       <Icon
-                        className={`h-5 w-5 ${
-                          isActive ? "text-primary-foreground" : config.color
-                        }`}
+                        className={`h-5 w-5 ${isActive ? "text-primary-foreground" : config.color
+                          }`}
                       />
                     </div>
                     <p className="text-sm font-semibold">{config.label}</p>
                     <p
-                      className={`text-xs mt-0.5 ${
-                        isActive
-                          ? "text-primary-foreground/70"
-                          : "text-muted-foreground"
-                      }`}
+                      className={`text-xs mt-0.5 ${isActive
+                        ? "text-primary-foreground/70"
+                        : "text-muted-foreground"
+                        }`}
                     >
                       {cat.count.toLocaleString("bn-BD")}টি পণ্য
                     </p>
@@ -432,7 +423,7 @@ export default function AccessoriesPage() {
       </section>
 
       {/* ─── Products Section ─── */}
-      <div className="container mx-auto px-4">
+      <div className="max-w-7xl mx-auto px-4">
         <section className="py-8 sm:py-10">
           {/* Toolbar */}
           <motion.div
@@ -609,7 +600,7 @@ export default function AccessoriesPage() {
 
       {/* ─── Bottom CTA ─── */}
       <section className="bg-gradient-to-br from-fuchsia-600/5 via-purple-600/10 to-violet-600/5 border-t border-border/40">
-        <div className="container mx-auto px-4 py-12 sm:py-16">
+        <div className="max-w-7xl mx-auto px-4 py-12 sm:py-16">
           <motion.div
             initial="hidden"
             whileInView="visible"

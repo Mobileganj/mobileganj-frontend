@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Plus, Search, Eye, Printer } from 'lucide-react';
+import { Plus, Search, Eye, Printer, Edit } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -118,11 +118,16 @@ export default function SalesPage() {
                   <td className="p-4">
                     <div className="flex items-center justify-center gap-2">
                       <Link href={`/admin/sales/${sale.id}`}>
-                        <Button variant="ghost" size="icon">
+                        <Button variant="ghost" size="icon" title="View details">
                           <Eye className="w-4 h-4" />
                         </Button>
                       </Link>
-                      <Button variant="ghost" size="icon">
+                      <Link href={`/admin/sales/${sale.id}/edit`}>
+                        <Button variant="ghost" size="icon" title="Edit sale">
+                          <Edit className="w-4 h-4 text-blue-500" />
+                        </Button>
+                      </Link>
+                      <Button variant="ghost" size="icon" title="Print invoice">
                         <Printer className="w-4 h-4" />
                       </Button>
                     </div>

@@ -193,7 +193,7 @@ export default function AboutPage() {
         <div className="absolute top-20 right-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
         <div className="absolute bottom-10 left-10 w-60 h-60 bg-primary/5 rounded-full blur-3xl" />
 
-        <div className="container mx-auto px-4 py-16 sm:py-24 relative">
+        <div className="max-w-7xl mx-auto px-4 py-16 sm:py-24 relative">
           {/* Breadcrumb */}
           <motion.nav
             initial={{ opacity: 0, y: -10 }}
@@ -284,7 +284,7 @@ export default function AboutPage() {
 
       {/* ─── Stats Section ─── */}
       <section className="border-y border-border/40 bg-muted/20">
-        <div className="container mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -296,9 +296,8 @@ export default function AboutPage() {
               <motion.div
                 key={stat.label}
                 variants={scaleIn}
-                className={`flex flex-col items-center justify-center py-8 sm:py-10 ${
-                  i < stats.length - 1 ? "border-r border-border/40" : ""
-                }`}
+                className={`flex flex-col items-center justify-center py-8 sm:py-10 ${i < stats.length - 1 ? "border-r border-border/40" : ""
+                  }`}
               >
                 <stat.icon className={`h-6 w-6 ${stat.color} mb-2`} />
                 <p className="text-2xl sm:text-3xl font-bold tabular-nums">
@@ -313,7 +312,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <div className="container mx-auto px-4">
+      <div className="max-w-7xl mx-auto px-4">
         {/* ─── Our Story ─── */}
         <section className="py-16 sm:py-20">
           <motion.div
@@ -617,7 +616,7 @@ export default function AboutPage() {
 
       {/* ─── CTA Section ─── */}
       <section className="bg-gradient-to-br from-primary/5 via-primary/10 to-primary/5 border-y border-border/40">
-        <div className="container mx-auto px-4 py-16 sm:py-20">
+        <div className="max-w-7xl mx-auto px-4 py-16 sm:py-20">
           <motion.div
             initial="hidden"
             whileInView="visible"

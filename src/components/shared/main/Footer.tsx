@@ -32,13 +32,13 @@ export default function Footer() {
   return (
     <footer className="bg-[#1a1a1a] text-gray-300 mt-16">
       {/* Main Footer */}
-      <div className="container mx-auto px-4 py-12">
+      <div className="max-w-7xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
 
           {/* Brand + Contact */}
           <div className="space-y-5">
-            <Link href="/" className="inline-block">
-              <img src="/logo.png" alt="Mobile GANJ" className="h-10 w-auto logo-adaptive" />
+            <Link href="/" className="inline-block mb-4">
+              <img src="/logo.png" alt="Mobile GANJ" className="h-[72px] w-auto invert brightness-0" />
             </Link>
             <div className="space-y-3 text-sm">
               <a href="tel:+8801234567890" className="flex items-center gap-2 hover:text-white transition-colors">

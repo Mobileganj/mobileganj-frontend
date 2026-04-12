@@ -18,13 +18,13 @@ const sortOptions = [
 
 // Brand-specific banner gradients
 const brandBanners: Record<string, { gradient: string }> = {
-  all:     { gradient: "from-blue-700 via-indigo-700 to-violet-700" },
-  Apple:   { gradient: "from-gray-800 via-gray-700 to-gray-600" },
+  all: { gradient: "from-blue-700 via-indigo-700 to-violet-700" },
+  Apple: { gradient: "from-gray-800 via-gray-700 to-gray-600" },
   Samsung: { gradient: "from-blue-600 via-blue-700 to-indigo-800" },
-  Google:  { gradient: "from-red-500 via-yellow-500 to-green-500" },
+  Google: { gradient: "from-red-500 via-yellow-500 to-green-500" },
   OnePlus: { gradient: "from-red-600 via-red-700 to-orange-700" },
-  Xiaomi:  { gradient: "from-orange-500 via-orange-600 to-red-600" },
-  Others:  { gradient: "from-teal-600 via-cyan-600 to-sky-600" },
+  Xiaomi: { gradient: "from-orange-500 via-orange-600 to-red-600" },
+  Others: { gradient: "from-teal-600 via-cyan-600 to-sky-600" },
 };
 
 export default function BuyPhonePage() {
@@ -63,9 +63,9 @@ export default function BuyPhonePage() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.4 }}
-          className={`w-full h-48 md:h-64 bg-gradient-to-r ${banner.gradient} overflow-hidden relative`}
+          className={`w-full h-30 md:h-38 bg-gradient-to-r ${banner.gradient} overflow-hidden relative`}
         >
-          <div className="absolute inset-0 flex items-end p-8">
+          <div className="absolute inset-0 flex items-end p-8 max-w-7xl mx-auto">
             <div>
               <p className="text-white/60 text-sm mb-1">Mobile Phone</p>
               <h1 className="text-white text-3xl md:text-4xl font-bold">{brandLabel}</h1>
@@ -77,15 +77,14 @@ export default function BuyPhonePage() {
 
       {/* Brand Chips */}
       <div className="border-b border-border/40 bg-background">
-        <div className="container mx-auto px-4 py-3">
+        <div className="max-w-7xl mx-auto px-4 py-3">
           <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
             <button
               onClick={() => setActiveBrand("all")}
-              className={`px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-all border ${
-                activeBrand === "all"
-                  ? "bg-primary text-primary-foreground border-primary"
-                  : "border-border/60 hover:bg-accent"
-              }`}
+              className={`px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-all border ${activeBrand === "all"
+                ? "bg-primary text-primary-foreground border-primary"
+                : "border-border/60 hover:bg-accent"
+                }`}
             >
               All
             </button>
@@ -93,11 +92,10 @@ export default function BuyPhonePage() {
               <button
                 key={brand}
                 onClick={() => setActiveBrand(brand)}
-                className={`px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-all border ${
-                  activeBrand === brand
-                    ? "bg-primary text-primary-foreground border-primary"
-                    : "border-border/60 hover:bg-accent"
-                }`}
+                className={`px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-all border ${activeBrand === brand
+                  ? "bg-primary text-primary-foreground border-primary"
+                  : "border-border/60 hover:bg-accent"
+                  }`}
               >
                 {brand}
               </button>
@@ -107,7 +105,7 @@ export default function BuyPhonePage() {
       </div>
 
       {/* Main Content */}
-      <div className="container mx-auto px-4 py-8">
+      <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="flex gap-6 lg:gap-8">
           {/* Desktop Sidebar */}
           <aside className="hidden lg:block w-64 flex-shrink-0">
@@ -139,7 +137,7 @@ export default function BuyPhonePage() {
                     </Button>
                   </SheetTrigger>
                   <SheetContent side="left" className="w-80 overflow-y-auto">
-                    <FilterSidebar isMobile onClose={() => {}} />
+                    <FilterSidebar isMobile onClose={() => { }} />
                   </SheetContent>
                 </Sheet>
                 <p className="text-sm text-muted-foreground">

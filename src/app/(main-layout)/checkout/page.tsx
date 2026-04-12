@@ -82,29 +82,26 @@ function CheckoutSteps() {
           <div key={s.step} className="flex items-center">
             <div className="flex flex-col items-center">
               <div
-                className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-semibold border-2 transition-all ${
-                  s.done
+                className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-semibold border-2 transition-all ${s.done
                     ? "bg-primary border-primary text-primary-foreground"
                     : s.active
                       ? "border-primary text-primary bg-primary/10"
                       : "border-muted-foreground/30 text-muted-foreground bg-muted"
-                }`}
+                  }`}
               >
                 {s.done ? <CheckCircle2 className="h-5 w-5" /> : s.step}
               </div>
               <span
-                className={`text-xs mt-1.5 font-medium ${
-                  s.done || s.active ? "text-primary" : "text-muted-foreground"
-                }`}
+                className={`text-xs mt-1.5 font-medium ${s.done || s.active ? "text-primary" : "text-muted-foreground"
+                  }`}
               >
                 {s.label}
               </span>
             </div>
             {i < 2 && (
               <div
-                className={`w-16 sm:w-24 h-0.5 mx-2 mb-5 rounded-full ${
-                  s.done ? "bg-primary" : "bg-muted-foreground/20"
-                }`}
+                className={`w-16 sm:w-24 h-0.5 mx-2 mb-5 rounded-full ${s.done ? "bg-primary" : "bg-muted-foreground/20"
+                  }`}
               />
             )}
           </div>
@@ -213,7 +210,7 @@ export default function CheckoutPage() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-6 sm:py-8">
+    <div className="max-w-7xl mx-auto px-4 py-6 sm:py-8">
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
         <Link href="/" className="hover:text-primary transition-colors">
@@ -456,11 +453,10 @@ export default function CheckoutPage() {
                             key={method.id}
                             whileHover={{ scale: 1.01 }}
                             whileTap={{ scale: 0.99 }}
-                            className={`relative flex items-center gap-3 border-2 rounded-xl p-4 cursor-pointer transition-all duration-200 ${
-                              isSelected
+                            className={`relative flex items-center gap-3 border-2 rounded-xl p-4 cursor-pointer transition-all duration-200 ${isSelected
                                 ? "border-primary bg-primary/5 shadow-sm ring-1 ring-primary/20"
                                 : "border-border/60 hover:border-primary/40 hover:shadow-sm"
-                            }`}
+                              }`}
                             onClick={() => setPaymentMethod(method.id)}
                           >
                             {isSelected && (
@@ -592,7 +588,7 @@ export default function CheckoutPage() {
                                       {Math.round(
                                         ((item.price - item.offerPrice) /
                                           item.price) *
-                                          100,
+                                        100,
                                       )}
                                       %
                                     </Badge>
